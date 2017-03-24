@@ -5,7 +5,7 @@
   <link rel="shortcut icon" href="http:lacalhost.com/theme/image/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>      Cropse:
-Python iterator&generator
+Post List
 </title>
   <!-- Latest compiled and minified CSS -->
 
@@ -60,53 +60,65 @@ Python iterator&generator
         <div class="col-12">
           <div class="card border-1">
             <div class="card-block caption post-detail-item">
-              <h2 class="card-header"><a href="http:lacalhost.com/python-iteratorgenerator-.html">Python iterator&generator</a>
+              <h2 class="card-header"><a href="http:lacalhost.com/deploy設定簡單紀錄-.html">Deploy設定簡單紀錄</a>
 
-              <small>2017- 3-24</small>
+              <small>2017- 2-07</small>
               </h2>
               <hr>
             
               <div class="card-text">
-                <p>先講結論：<br>
-Iterator 是透過一個class 內部宣告<code>__iter__</code>還有<code>__next__</code>(python2 是<code>next</code>)方法來達成可迭代(iterable)的物件(class)<br>
-Genetator 是透過yield簡單產生一個iterator的方法(method)</p>
-<p>這是一般的iterator</p>
-<div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">iterator</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span><span class="o">:</span>
-    <span class="nx">def</span> <span class="nx">__init__</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">stop</span><span class="p">)</span><span class="o">:</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">start</span> <span class="o">=</span> <span class="nx">start</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">stop</span> <span class="o">=</span> <span class="nx">stop</span>
-    <span class="nx">def</span> <span class="nx">__iter__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
-        <span class="k">return</span> <span class="nx">self</span>
-    <span class="nx">def</span> <span class="nx">__next__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
-        <span class="k">if</span> <span class="nx">self</span><span class="p">.</span><span class="nx">start</span> <span class="o">&gt;=</span> <span class="nx">self.stop</span>:
-            <span class="kt">raise</span> <span class="nx">StopIteration</span>
-        <span class="nx">current</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">start</span><span class="o">**</span><span class="mi">2</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">start</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="nx">current</span>
-</pre></div>
-
-
-<p>這是用generator產生的方法</p>
-<div class="highlight"><pre><span></span>def generator(start,end):
-    for i in range(start,end):
-        yield i**2
-</pre></div>
-
-
-<p><a href="https://docs.python.org/3/tutorial/classes.html?#iterators">官方document這樣形容generators</a><br>
-<strong>Generators are a simple and powerful tool for creating iterators</strong><br>
-Anything that can be done with generators can also be done with class-based iterators as described in the previous section. What makes generators so compact is that the <code>__iter__()</code>and <code>__next__()</code> methods are created automatically.</p>
-<p>之後用法大致上都相同，都具備有<a href="https://docs.python.org/3/glossary.html#term-iterable"><strong>iterable</strong>的特性</a>，雖然在用<code>list()</code>的時候感覺很像，是因為list有<strong>iterable</strong>的特性，但是iterator是用完就丟的概念，不能重複提取，好處是在處理時可以不用佔用到記憶體空間，像python2中xrange的用法</p>
+                這裡大概整理一下整個網站deploy的過程,等下次在詳細整理s3跟ec2設定的部分 django專案名稱是src, 路徑放置在/home/ubuntu/blog 先從配置文件開始 首先新增一個production.py在/home/ubuntu/blog/setting/ 以下內容： from .base import * import os # SECURITY WARNING: keep the secret key used in production secret! #...
               </div>
 
-              <p id="card-tag">Tag:                 <a href="http:lacalhost.com/tag/python.html" class="badge btn-primary">python</a>
-              </p>              
+              <p id="card-tag">Tag:                 <a href="http:lacalhost.com/tag/aws.html" class="badge btn-primary">AWS</a>
+                                
+
+                <a href="http:lacalhost.com/tag/deploy.html" class="badge btn-primary">deploy</a>
+                                
+
+                <a href="http:lacalhost.com/tag/uwsgi.html" class="badge btn-primary">uwsgi</a>
+                                
+
+                <a href="http:lacalhost.com/tag/nginx.html" class="badge btn-primary">nginx</a>
+                                
+
+                <a href="http:lacalhost.com/tag/postgresql.html" class="badge btn-primary">postgresql</a>
+                                
+
+              </p>
+              <a href="http:lacalhost.com/deploy設定簡單紀錄-.html" class="btn btn-primary btn-lg" id="view">View <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+              
             </div>
           </div>
           <hr>
         </div>
-    </div>
+      </div>
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="http:lacalhost.com/author/cropse.html" tabindex="-1">
+              <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="http:lacalhost.com/author/cropse.html" tabindex="-1">
+              <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+          </li>              <li class="page-item">
+                <a class="page-link" href="http:lacalhost.com/author/cropse.html">1</a></li>
+              <li class="page-item disabled">
+                <a class="page-link" href="http:lacalhost.com/author/cropse2.html">2</a></li>
+<li class="page-item disabled">
+            <a class="page-link" href="http:lacalhost.com/author/cropse3.html" tabindex="-1">
+              <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+          </li>
+          <li class="page-item disabled">
+            <a class="page-link" href="http:lacalhost.com/author/cropse2.html" tabindex="-1">
+              <i class="fa fa-double-angle-right" aria-hidden="true"></i></a>
+          </li>
+        </ul>
+      </nav>
   </div>
+
+
 
 <!-- Side Bar -->
 <div class="col-lg-3 col-md-4 ">

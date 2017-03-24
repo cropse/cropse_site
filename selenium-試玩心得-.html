@@ -5,7 +5,7 @@
   <link rel="shortcut icon" href="http:lacalhost.com/theme/image/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>      Cropse:
-Python iterator&generator
+Selenium 試玩心得
 </title>
   <!-- Latest compiled and minified CSS -->
 
@@ -60,46 +60,43 @@ Python iterator&generator
         <div class="col-12">
           <div class="card border-1">
             <div class="card-block caption post-detail-item">
-              <h2 class="card-header"><a href="http:lacalhost.com/python-iteratorgenerator-.html">Python iterator&generator</a>
+              <h2 class="card-header"><a href="http:lacalhost.com/selenium-試玩心得-.html">Selenium 試玩心得</a>
 
-              <small>2017- 3-24</small>
+              <small>2017- 2-18</small>
               </h2>
               <hr>
             
               <div class="card-text">
-                <p>先講結論：<br>
-Iterator 是透過一個class 內部宣告<code>__iter__</code>還有<code>__next__</code>(python2 是<code>next</code>)方法來達成可迭代(iterable)的物件(class)<br>
-Genetator 是透過yield簡單產生一個iterator的方法(method)</p>
-<p>這是一般的iterator</p>
-<div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">iterator</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span><span class="o">:</span>
-    <span class="nx">def</span> <span class="nx">__init__</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">stop</span><span class="p">)</span><span class="o">:</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">start</span> <span class="o">=</span> <span class="nx">start</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">stop</span> <span class="o">=</span> <span class="nx">stop</span>
-    <span class="nx">def</span> <span class="nx">__iter__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
-        <span class="k">return</span> <span class="nx">self</span>
-    <span class="nx">def</span> <span class="nx">__next__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
-        <span class="k">if</span> <span class="nx">self</span><span class="p">.</span><span class="nx">start</span> <span class="o">&gt;=</span> <span class="nx">self.stop</span>:
-            <span class="kt">raise</span> <span class="nx">StopIteration</span>
-        <span class="nx">current</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">start</span><span class="o">**</span><span class="mi">2</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">start</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="nx">current</span>
-</pre></div>
-
-
-<p>這是用generator產生的方法</p>
-<div class="highlight"><pre><span></span>def generator(start,end):
-    for i in range(start,end):
-        yield i**2
-</pre></div>
-
-
-<p><a href="https://docs.python.org/3/tutorial/classes.html?#iterators">官方document這樣形容generators</a><br>
-<strong>Generators are a simple and powerful tool for creating iterators</strong><br>
-Anything that can be done with generators can also be done with class-based iterators as described in the previous section. What makes generators so compact is that the <code>__iter__()</code>and <code>__next__()</code> methods are created automatically.</p>
-<p>之後用法大致上都相同，都具備有<a href="https://docs.python.org/3/glossary.html#term-iterable"><strong>iterable</strong>的特性</a>，雖然在用<code>list()</code>的時候感覺很像，是因為list有<strong>iterable</strong>的特性，但是iterator是用完就丟的概念，不能重複提取，好處是在處理時可以不用佔用到記憶體空間，像python2中xrange的用法</p>
+                <p>簡單紀錄一下有遇到的問題：</p>
+<h4>遇到這個Error log</h4>
+<p><code>Unexpected Exception: Error: cross-process JS call failed.</code><br>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/flow-control/?src=dp-dl-othersby">安裝這個插件</a></p>
+<h3>安裝geckodriver</h3>
+<p>另外需要安裝geckodriver才能從執行，不然會有error<br>
+<code>selenium.common.exceptions.WebDriverException: Message: 'geckodriver' executable needs to be in PATH.</code></p>
+<p>https://github.com/mozilla/geckodriver/releases</p>
+<p><code>echo $PATH</code> 看一下執行路徑<br>
+把下載下來的執行檔丟進路徑內(我丟進<code>usr/local/bin</code> on OSX)</p>
+<h3>plugin</h3>
+<ul>
+<li>Selenium Expert (Selenium IDE)</li>
+<li>Selenium IDE</li>
+<li>Selenium IDE Button</li>
+<li>Selenium IDE: Flow Control</li>
+</ul>
+<p>最後記得安裝seletinum<br>
+<code>pip install seletinum</code></p>
+<h3>開始使用</h3>
+<p>因為自己測試發現後續更新有些不一樣，這裡測試環境都是OSX，所以前置有踩一點小雷<br>
+操作方式參考以下<br>
+<a href="https://seleniumhq.github.io/selenium/docs/api/py/index.html#introduction">documentation</a><br>
+<a href="http://ithelp.ithome.com.tw/articles/10108684">CI Server 23 - 使用Selenium進行瀏覽器自動化測試</a><br>
+<a href="https://www.youtube.com/watch?v=MQH4Rau_F_A">如何使用 Selenium 以及 Python 輕鬆抓取 Agoda 的旅館資訊?</a></p>
+<p>最後IDE可以直接產生unittest，只支援python2，但是實際上簡單的測試用python3也可以直接跑</p>
               </div>
 
-              <p id="card-tag">Tag:                 <a href="http:lacalhost.com/tag/python.html" class="badge btn-primary">python</a>
+              <p id="card-tag">Tag:                 <a href="http:lacalhost.com/tag/testcase.html" class="badge btn-primary">testcase</a>
+                <a href="http:lacalhost.com/tag/selenium.html" class="badge btn-primary">selenium</a>
               </p>              
             </div>
           </div>

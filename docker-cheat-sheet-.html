@@ -5,7 +5,7 @@
   <link rel="shortcut icon" href="http:lacalhost.com/theme/image/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>      Cropse:
-Python iterator&generator
+Docker cheat sheet
 </title>
   <!-- Latest compiled and minified CSS -->
 
@@ -60,46 +60,69 @@ Python iterator&generator
         <div class="col-12">
           <div class="card border-1">
             <div class="card-block caption post-detail-item">
-              <h2 class="card-header"><a href="http:lacalhost.com/python-iteratorgenerator-.html">Python iterator&generator</a>
+              <h2 class="card-header"><a href="http:lacalhost.com/docker-cheat-sheet-.html">Docker cheat sheet</a>
 
               <small>2017- 3-24</small>
               </h2>
               <hr>
             
               <div class="card-text">
-                <p>先講結論：<br>
-Iterator 是透過一個class 內部宣告<code>__iter__</code>還有<code>__next__</code>(python2 是<code>next</code>)方法來達成可迭代(iterable)的物件(class)<br>
-Genetator 是透過yield簡單產生一個iterator的方法(method)</p>
-<p>這是一般的iterator</p>
-<div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">iterator</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span><span class="o">:</span>
-    <span class="nx">def</span> <span class="nx">__init__</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">stop</span><span class="p">)</span><span class="o">:</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">start</span> <span class="o">=</span> <span class="nx">start</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">stop</span> <span class="o">=</span> <span class="nx">stop</span>
-    <span class="nx">def</span> <span class="nx">__iter__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
-        <span class="k">return</span> <span class="nx">self</span>
-    <span class="nx">def</span> <span class="nx">__next__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
-        <span class="k">if</span> <span class="nx">self</span><span class="p">.</span><span class="nx">start</span> <span class="o">&gt;=</span> <span class="nx">self.stop</span>:
-            <span class="kt">raise</span> <span class="nx">StopIteration</span>
-        <span class="nx">current</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">start</span><span class="o">**</span><span class="mi">2</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">start</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="nx">current</span>
-</pre></div>
-
-
-<p>這是用generator產生的方法</p>
-<div class="highlight"><pre><span></span>def generator(start,end):
-    for i in range(start,end):
-        yield i**2
-</pre></div>
-
-
-<p><a href="https://docs.python.org/3/tutorial/classes.html?#iterators">官方document這樣形容generators</a><br>
-<strong>Generators are a simple and powerful tool for creating iterators</strong><br>
-Anything that can be done with generators can also be done with class-based iterators as described in the previous section. What makes generators so compact is that the <code>__iter__()</code>and <code>__next__()</code> methods are created automatically.</p>
-<p>之後用法大致上都相同，都具備有<a href="https://docs.python.org/3/glossary.html#term-iterable"><strong>iterable</strong>的特性</a>，雖然在用<code>list()</code>的時候感覺很像，是因為list有<strong>iterable</strong>的特性，但是iterator是用完就丟的概念，不能重複提取，好處是在處理時可以不用佔用到記憶體空間，像python2中xrange的用法</p>
+                <p>Useage:</p>
+<p><code>docker [option] {Command}</code><br>
+    -i interactive mode<br>
+    -t pseudo TTY mode<br>
+    -d background mode<br>
+    -p {local host port}:{container vps port} porting mapping</p>
+<p>背景執行請用 -it -d, 這樣後面就可以用logs去查背景輸出</p>
+<p>Command:</p>
+<ul>
+<li><code>inspect</code> <code>{container_id}</code> looking for detail , json form</li>
+<li><code>logs</code> <code>{container_id}</code> inquery process log in background</li>
+<li><code>ps</code> inquery running container<ul>
+<li><code>-a</code> : according terminated </li>
+<li><code>-q</code> : only inquery id</li>
+</ul>
+</li>
+<li><code>images</code> 查本地中的 image<ul>
+<li><code>-q</code> : only id</li>
+</ul>
+</li>
+<li><code>commit</code> <code>{container_id}</code> <code>{repository_name:tag}</code> </li>
+<li><code>build</code> build Dockerfile</li>
+</ul>
+<p><code>-t</code> <code>{Tag name}</code> : add Tag<br>
+<code>login</code> login docker registry to be ready to push</p>
+<hr>
+<p><strong>Delete all containers</strong><br>
+<code>docker rm $(docker ps -a -q)</code> <br>
+<strong>Delete all images</strong><br>
+<code>docker rmi $(docker images -q)</code> <br>
+<strong>Login to running container</strong><br>
+<code>docker exec -it {container_id} bash</code> </p>
+<hr>
+<h2>Dockerfile</h2>
+<p><code>FROM</code> <code>{OS}</code> <br>
+<code>RUN</code> <code>{shell_command}</code> command on build image<br>
+<code>CMD</code> <code>{shell_command}</code> command after container build<br>
+<code>COPY</code> <code>{localfile_path}</code> <code>{container_path}</code> cp指令<br>
+<code>ADD</code> 類似wget之類的透過URL下載，可以自動解壓縮，但是非必要建議COPY</p>
+<hr>
+<h1>Docker Compose Commands</h1>
+<p><code>docker compose up</code> starts up all the containers. <br>
+<code>docker compose ps</code> checks the status of the containers managed by docker compose. <br>
+<code>docker compose logs</code> outputs colored and aggregated logs for the compose-managed <br>
+containers. <br>
+<code>docker compose logs</code>  <code>-f</code> outputs appended log when the log grows. <br>
+<code>docker compose logs</code> <code>{container name}</code> in the end outputs the logs of a specific <br>
+container. <br>
+<code>docker compose stop</code> stops all the running containers without removing them. <br>
+<code>docker compose rm</code> removes all the containers.<br>
+<code>docker compose build</code> rebuilds all the images.</p>
+<hr>
+<p><strong><em>Docker-compose 不需要做link，內部的port根據services名稱方便管理跟開關功能</em></strong></p>
               </div>
 
-              <p id="card-tag">Tag:                 <a href="http:lacalhost.com/tag/python.html" class="badge btn-primary">python</a>
+              <p id="card-tag">Tag:                 <a href="http:lacalhost.com/tag/docker.html" class="badge btn-primary">docker</a>
               </p>              
             </div>
           </div>

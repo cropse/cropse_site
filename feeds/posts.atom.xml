@@ -23,6 +23,11 @@ pip install ghp-import
 &lt;p&gt;改&lt;code&gt;GITHUB_PAGES_BRANCH=gh-pages&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;在&lt;code&gt;github: publish&lt;/code&gt;後面加入:&lt;br&gt;
 &lt;code&gt;pelican content -o output -s publishconf.py&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;em&gt; 裝theme:&lt;br&gt;
+&lt;code&gt;pelican-themes --install {theme_path}&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;-l&lt;/code&gt;:list theme installed&lt;br&gt;
+&lt;/em&gt;pelicanconf.py&lt;/em&gt;:&lt;br&gt;
+&lt;code&gt;THEME = '{theme-name}'&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;pip install markdown_checklist&lt;/code&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;MARKDOWN = {
     &amp;#39;extension_configs&amp;#39;: {

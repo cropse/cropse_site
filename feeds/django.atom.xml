@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog - Django</title><link href="http:lacalhost.com/" rel="alternate"></link><link href="http:lacalhost.com/feeds/django.atom.xml" rel="self"></link><id>http:lacalhost.com/</id><updated>2017-02-07T17:40:05+08:00</updated><entry><title>Deploy設定簡單紀錄</title><link href="http:lacalhost.com/deploy%E8%A8%AD%E5%AE%9A%E7%B0%A1%E5%96%AE%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-02-07T17:40:05+08:00</published><updated>2017-02-07T17:40:05+08:00</updated><author><name>Cropse</name></author><id>tag:None,2017-02-07:lacalhost.com/deploy設定簡單紀錄-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡大概整理一下整個網站deploy的過程,等下次在詳細整理s3跟ec2設定的部分&lt;/p&gt;
+&lt;p&gt;django專案名稱是&lt;strong&gt;src&lt;/strong&gt;, 路徑放置在&lt;strong&gt;/home/ubuntu/blog&lt;/strong&gt;&lt;br&gt;
+先從配置文件開始&lt;br&gt;
+首先新增一個&lt;code&gt;production.py&lt;/code&gt;在/home/ubuntu/blog/setting/&lt;br&gt;
+以下內容：&lt;/p&gt;
+&lt;hr&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.base&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+
+&lt;span class="c1"&gt;# SECURITY WARNING: keep the secret key used in production secret!&lt;/span&gt;
+&lt;span class="c1"&gt;# 請自己新增一個 不要直接用 http://www.miniwebtool.com/django-secret-key-generator/&lt;/span&gt;
+&lt;span class="n"&gt;SECRET_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;-we5#2la2p=%tj1#w6t(3dgh#1=f8!tx#tmy7khui2yw1$&lt;/span&gt;&lt;span class="si"&gt;%g&lt;/span&gt;&lt;span class="s1"&gt;32&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# SECURITY WARNING: don&amp;#39;t run with debug turned on in production!&lt;/span&gt;
+&lt;span class="n"&gt;DEBUG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 這邊填上網址允許&lt;/span&gt;
+&lt;span class="n"&gt;ALLOWED_HOSTS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 選擇你的db, 這裡用postgresql&lt;/span&gt;
+&lt;span class="n"&gt;DATABASES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;default&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;ENGINE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;django.db.backends.postgresql_psycopg2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;NAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;USER&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;PASSWORD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;HOST&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;PORT&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;5432&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# S3 設定用&lt;/span&gt;
+&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;storages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+
+&lt;span class="n"&gt;STATICFILES_STORAGE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;storages.backends.s3boto3.S3Boto3Storage&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;AWS_REGION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ap-northeast-1&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;AWS_QUERYSTRING_AUTH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;AWS_ACCESS_KEY_ID&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;lt;b&amp;gt;tag&amp;lt;/b&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;AWS_SECRET_ACCESS_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;your access Key&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;AWS_STORAGE_BUCKET_NAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;your s3 bucket name&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;MEDIA_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;http://&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;.s3.amazonaws.com/media/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;AWS_STORAGE_BUCKET_NAME&lt;/span&gt;
+&lt;span class="n"&gt;DEFAULT_FILE_STORAGE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;storages.backends.s3boto3.S3Boto3Storage&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;h1&gt;設定ec2伺服器&lt;/h1&gt;
+&lt;p&gt;在ec2上面開一個ubuntu&lt;br&gt;
+連線後開始安裝套件, 這裡路徑是/home/ubuntu/blog&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class="c1"&gt;# source /home/debian/VENV/bin/activate&lt;/span&gt;
+&lt;span class="c1"&gt;# 先安裝套件&lt;/span&gt;
+apt-get update -y
+apt-get upgrade -y
+apt-get install  nginx uwsgi python3 build-essential python3-dev python3-setuptools python3-pip -y
+apt-get install uwsgi-plugin-python3 -y
+apt-get install libpq-dev -y
+apt-get install postgresql postgresql-contrib -y
+
+apt install awscli -y
+pip3 install uwsgi
+
+&lt;span class="c1"&gt;# application import, 如果專案放github請用git clone&lt;/span&gt;
+aws s3 cp s3://cropse/Blog/ /home/ubuntu/blog --recursive
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;a href="https://ssorc.tw/242"&gt;PostgreSQL指令集&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://lolikitty.pixnet.net/blog/post/28167655-postgresql-%E6%8C%87%E4%BB%A4"&gt;PostgreSQL 指令&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://ching119.pixnet.net/blog/post/63697343-%E3%80%90%E7%B3%BB%E7%B5%B1%E3%80%91postgresql-%3A-%E8%A8%98%E9%8C%84%E4%B8%80%E4%BA%9B%E8%A8%AD%E5%AE%9A%E5%92%8C%E6%8C%87%E4%BB%A4"&gt;【系統】PostgreSQL : 記錄一些設定和指令&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;設定nginx&lt;/h1&gt;
+&lt;p&gt;接下來設定nginx,剛裝完之後可以直接開80 port檢查demo網頁確認運作正常&lt;br&gt;
+這邊用sock的方式對伺服器做存取而不是設定port&lt;br&gt;
+檔案名稱&lt;code&gt;default&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;upstream&lt;/span&gt; &lt;span class="nt"&gt;django&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;server&lt;/span&gt; &lt;span class="n"&gt;unix&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;///&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sock&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nt"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;listen&lt;/span&gt; &lt;span class="err"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;server_name&lt;/span&gt; &lt;span class="err"&gt;52.68.0.97&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;charset&lt;/span&gt; &lt;span class="err"&gt;utf-8&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;client_max_body_size&lt;/span&gt; &lt;span class="err"&gt;20M&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+
+    &lt;span class="err"&gt;location&lt;/span&gt; &lt;span class="err"&gt;/static&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+          &lt;span class="err"&gt;alias&lt;/span&gt; &lt;span class="err"&gt;/home/ubuntu/blog/static_cdn&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;#&lt;/span&gt;   &lt;span class="nt"&gt;setting&lt;/span&gt; &lt;span class="nt"&gt;in&lt;/span&gt; &lt;span class="nt"&gt;media&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="nt"&gt;static&lt;/span&gt; &lt;span class="nt"&gt;in&lt;/span&gt; &lt;span class="nt"&gt;local&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;    &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;static&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;          &lt;span class="err"&gt;alias&lt;/span&gt; &lt;span class="err"&gt;/home/ubuntu/blog/static_cdn&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;    &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;#&lt;/span&gt;    &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;media&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;          &lt;span class="err"&gt;alias&lt;/span&gt; &lt;span class="err"&gt;/home/ubuntu/blog/media_cdn&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;    &lt;span class="p"&gt;}&lt;/span&gt;
+
+
+    &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;django&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:8080&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;/etc/nginx/uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;接下來設定uwsgi,注意專案名稱跟路徑&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;uwsgi.ini&lt;/code&gt;&lt;br&gt;
+可以用'uwsgi -i uwsgi.ini'先開啟測試&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[uwsgi]&lt;/span&gt;
+&lt;span class="na"&gt;chdir&lt;/span&gt;        &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/home/ubuntu/blog/src&lt;/span&gt;
+&lt;span class="c1"&gt;# Django&amp;#39;s wsgi file&lt;/span&gt;
+&lt;span class="na"&gt;module&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;src.wsgi:application&lt;/span&gt;
+&lt;span class="na"&gt;env&lt;/span&gt;          &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;DJANGO_SETTINGS_MODULE=src.settings.production&lt;/span&gt;
+&lt;span class="c1"&gt;#.production&lt;/span&gt;
+&lt;span class="c1"&gt;# the virtualenv (full path)&lt;/span&gt;
+&lt;span class="c1"&gt;# home         = /home/debian/VENV&lt;/span&gt;
+&lt;span class="c1"&gt;# home         = /usr/bin&lt;/span&gt;
+
+&lt;span class="c1"&gt;# process-related settings&lt;/span&gt;
+&lt;span class="c1"&gt;# master&lt;/span&gt;
+&lt;span class="na"&gt;master&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="c1"&gt;# maximum number of worker processes&lt;/span&gt;
+&lt;span class="na"&gt;processes&lt;/span&gt;    &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;4&lt;/span&gt;
+&lt;span class="c1"&gt;# the socket (use the full path to be safe&lt;/span&gt;
+&lt;span class="na"&gt;socket&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/var/www/demo.sock&lt;/span&gt;
+&lt;span class="c1"&gt;# ... with appropriate permissions - may be needed&lt;/span&gt;
+&lt;span class="na"&gt;chmod-socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;777&lt;/span&gt;
+&lt;span class="na"&gt;uid&lt;/span&gt;          &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;root&lt;/span&gt;
+&lt;span class="c1"&gt;# gid          = 0&lt;/span&gt;
+&lt;span class="c1"&gt;# clear environment on exit&lt;/span&gt;
+&lt;span class="na"&gt;vacuum&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;h1&gt;寫好uwsgi的service&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html"&gt;Systemd 入门教程：命令篇&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://felix-lin.com/linux/init%E6%BC%94%E5%8C%96%E6%AD%B7%E7%A8%8B-%E8%BD%89%E8%B2%BC-%E6%B7%BA%E6%9E%90-linux-%E5%88%9D%E5%A7%8B%E5%8C%96-init-%E7%B3%BB%E7%B5%B1%EF%BC%8C%E7%AC%AC-3-%E9%83%A8%E5%88%86-systemd/"&gt;init演化歷程 – [轉貼] 淺析 Linux 初始化 init 系統，第 3 部分: Systemd&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
+&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;uWSGI Emperor&lt;/span&gt;
+&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;syslog.target&lt;/span&gt;
+
+&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/local/bin/uwsgi --ini /home/ubuntu/blog/deploy_setting/uwsgi.ini&lt;/span&gt;
+&lt;span class="c1"&gt;# Requires systemd version 211 or newer&lt;/span&gt;
+&lt;span class="na"&gt;RuntimeDirectory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;uwsgi&lt;/span&gt;
+&lt;span class="na"&gt;Restart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;always&lt;/span&gt;
+&lt;span class="na"&gt;KillSignal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;SIGQUIT&lt;/span&gt;
+&lt;span class="na"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;notify&lt;/span&gt;
+&lt;span class="na"&gt;StandardError&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;syslog&lt;/span&gt;
+&lt;span class="na"&gt;NotifyAccess&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;all&lt;/span&gt;
+
+&lt;span class="k"&gt;[Install]&lt;/span&gt;
+&lt;span class="na"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;multi-user.target&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;搬設定檔跟安裝套件&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# install package
+pip3 install -r /home/ubuntu/blog/requirement.txt
+
+#envirment of django settings
+export DJANGO_SETTINGS_MODULE=src.settings.production
+
+
+# nginx setting file
+cp /home/ubuntu/blog/deploy_setting/default /etc/nginx/sites-enabled/default
+
+# create user and collect static file
+python3 manage.py createsuperuser
+python3 manage.py collectstatic --noinput
+
+# uwsgi setting
+cp /home/ubuntu/blog/deploy_setting/emperor.uwsgi.service /etc/systemd/system/emperor.uwsgi.service
+systemctl enable emperor.uwsgi.service
+systemctl start emperor.uwsgi.service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;關於deploy還有很多可以優化的部分(CI/CD), 先手動過一次之後大概了解整個部屬的流程，整個流程再慢慢改善紀錄&lt;/p&gt;</content><category term="AWS"></category><category term="deploy"></category><category term="uwsgi"></category><category term="nginx"></category><category term="postgresql"></category></entry></feed>

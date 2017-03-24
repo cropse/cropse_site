@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog - CI/CD</title><link href="http:lacalhost.com/" rel="alternate"></link><link href="http:lacalhost.com/feeds/cicd.atom.xml" rel="self"></link><id>http:lacalhost.com/</id><updated>2017-02-20T14:40:04+08:00</updated><entry><title>Circleci範例紀錄</title><link href="http:lacalhost.com/circleci%E7%AF%84%E4%BE%8B%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-02-20T14:40:04+08:00</published><updated>2017-02-20T14:40:04+08:00</updated><author><name>Cropse</name></author><id>tag:None,2017-02-20:lacalhost.com/circleci範例紀錄-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡記錄使用Django_blog 在github每次push時使用circleci跑一次測試，circleci只使用一個專案不用錢(測試時間還是有限制)&lt;br&gt;
+基本上只要用circleci連結到你github的專案，專案有circle.yml就會在每次push時自動跑一次測試&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;circle.yml&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dependencies&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="kd"&gt;override&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kd"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;essential&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;setuptools&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;pyenv&lt;/span&gt; &lt;span class="n"&gt;global&lt;/span&gt; &lt;span class="mf"&gt;3.6&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;pip3&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;$HOME&lt;/span&gt;&lt;span class="sr"&gt;/Django_Blog/&lt;/span&gt;&lt;span class="n"&gt;requirement_ci&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;txt&lt;/span&gt;
+
+        &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;geckodriver&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="sr"&gt;/mozilla/geckodriver/releases/download/v0.14.0/g&lt;/span&gt;&lt;span class="n"&gt;eckodriver&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;14.0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;linux64&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tar&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;gz&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;tar&lt;/span&gt; &lt;span class="n"&gt;zxf&lt;/span&gt; &lt;span class="n"&gt;geckodriver&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;14.0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;linux64&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tar&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;gz&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;chmod&lt;/span&gt; &lt;span class="mi"&gt;755&lt;/span&gt; &lt;span class="n"&gt;geckodriver&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="n"&gt;geckodriver&lt;/span&gt; &lt;span class="sr"&gt;/usr/local/bin/&lt;/span&gt;
+&lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="kd"&gt;override&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt; &lt;span class="n"&gt;$HOME&lt;/span&gt;&lt;span class="sr"&gt;/Django_Blog/src/&lt;/span&gt;&lt;span class="n"&gt;manage&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;py&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="n"&gt;posts&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt; &lt;span class="n"&gt;$HOME&lt;/span&gt;&lt;span class="sr"&gt;/Django_Blog/src/&lt;/span&gt;&lt;span class="n"&gt;manage&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;py&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="n"&gt;pages&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;這裡注意到幾點&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://askubuntu.com/questions/870530/how-to-install-geckodriver-in-ubuntu"&gt;selenium的geckodriver問題&lt;/a&gt;，所以寫起來有點長&lt;/li&gt;
+&lt;li&gt;Django test 需要指定app 測試，不然不會跑&lt;/li&gt;
+&lt;li&gt;python3有很多版本，所以需要&lt;code&gt;pyenv global 3.6.0&lt;/code&gt; 做指定&lt;/li&gt;
+&lt;li&gt;可以rebuild with SSH, 跑完最後會有一組ssh讓你連進去debug&lt;/li&gt;
+&lt;li&gt;連進去在$HOME 的路徑下，所以寫config記得加該路徑&lt;/li&gt;
+&lt;li&gt;requirement另外寫一個，因為deploy不用selenium，測試端也不用uwsgi或是nginx&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Docker版本的之後再寫，先把docker-compose寫完再說&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Reference link&lt;/strong&gt;&lt;br&gt;
+&lt;a href="https://circleci.com/docs/configuration/"&gt;Docs&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://samkuo.me/post/2015/10/eavatar-circleci-continuous-integration/"&gt;山姆大的教學&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://blog.amowu.com/2015/04/devops-continuous-integration-delivery-docker-circleci-aws-beanstalk.html"&gt;DevOps：持續整合＆持續交付（Docker、CircleCI、AWS）&lt;/a&gt;&lt;/p&gt;</content><category term="CI/CD"></category><category term="selenium"></category><category term="testcase"></category><category term="deploy"></category></entry><entry><title>Selenium 試玩心得</title><link href="http:lacalhost.com/selenium-%E8%A9%A6%E7%8E%A9%E5%BF%83%E5%BE%97-.html" rel="alternate"></link><published>2017-02-18T15:42:57+08:00</published><updated>2017-02-18T15:42:57+08:00</updated><author><name>Cropse</name></author><id>tag:None,2017-02-18:lacalhost.com/selenium-試玩心得-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;簡單紀錄一下有遇到的問題：&lt;/p&gt;
+&lt;h4&gt;遇到這個Error log&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;Unexpected Exception: Error: cross-process JS call failed.&lt;/code&gt;&lt;br&gt;
+&lt;a href="https://addons.mozilla.org/en-US/firefox/addon/flow-control/?src=dp-dl-othersby"&gt;安裝這個插件&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;安裝geckodriver&lt;/h3&gt;
+&lt;p&gt;另外需要安裝geckodriver才能從執行，不然會有error&lt;br&gt;
+&lt;code&gt;selenium.common.exceptions.WebDriverException: Message: 'geckodriver' executable needs to be in PATH.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;https://github.com/mozilla/geckodriver/releases&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;echo $PATH&lt;/code&gt; 看一下執行路徑&lt;br&gt;
+把下載下來的執行檔丟進路徑內(我丟進&lt;code&gt;usr/local/bin&lt;/code&gt; on OSX)&lt;/p&gt;
+&lt;h3&gt;plugin&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Selenium Expert (Selenium IDE)&lt;/li&gt;
+&lt;li&gt;Selenium IDE&lt;/li&gt;
+&lt;li&gt;Selenium IDE Button&lt;/li&gt;
+&lt;li&gt;Selenium IDE: Flow Control&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最後記得安裝seletinum&lt;br&gt;
+&lt;code&gt;pip install seletinum&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;開始使用&lt;/h3&gt;
+&lt;p&gt;因為自己測試發現後續更新有些不一樣，這裡測試環境都是OSX，所以前置有踩一點小雷&lt;br&gt;
+操作方式參考以下&lt;br&gt;
+&lt;a href="https://seleniumhq.github.io/selenium/docs/api/py/index.html#introduction"&gt;documentation&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://ithelp.ithome.com.tw/articles/10108684"&gt;CI Server 23 - 使用Selenium進行瀏覽器自動化測試&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://www.youtube.com/watch?v=MQH4Rau_F_A"&gt;如何使用 Selenium 以及 Python 輕鬆抓取 Agoda 的旅館資訊?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;最後IDE可以直接產生unittest，只支援python2，但是實際上簡單的測試用python3也可以直接跑&lt;/p&gt;</content><category term="testcase"></category><category term="selenium"></category></entry></feed>

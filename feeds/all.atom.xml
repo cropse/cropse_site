@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog</title><link href="http:lacalhost.com/" rel="alternate"></link><link href="http:lacalhost.com/feeds/all.atom.xml" rel="self"></link><id>http:lacalhost.com/</id><updated>2017-03-24T15:51:00+08:00</updated><entry><title></title><link href="http:lacalhost.com/-.html" rel="alternate"></link><published>2017-03-24T15:51:00+08:00</published><updated>2017-03-24T15:51:00+08:00</updated><author><name>Cropse</name></author><id>tag:None,2017-03-24:lacalhost.com/-.html</id><summary type="html"></summary><content type="html">&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog</title><link href="http:lacalhost.com/" rel="alternate"></link><link href="http:lacalhost.com/feeds/all.atom.xml" rel="self"></link><id>http:lacalhost.com/</id><updated>2017-03-24T17:41:37+08:00</updated><entry><title>Docker cheat sheet</title><link href="http:lacalhost.com/docker-cheat-sheet-.html" rel="alternate"></link><published>2017-03-24T17:41:37+08:00</published><updated>2017-03-24T17:41:37+08:00</updated><author><name>Cropse</name></author><id>tag:None,2017-03-24:lacalhost.com/docker-cheat-sheet-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Useage:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker [option] {Command}&lt;/code&gt;&lt;br&gt;
+    -i interactive mode&lt;br&gt;
+    -t pseudo TTY mode&lt;br&gt;
+    -d background mode&lt;br&gt;
+    -p {local host port}:{container vps port} porting mapping&lt;/p&gt;
+&lt;p&gt;背景執行請用 -it -d, 這樣後面就可以用logs去查背景輸出&lt;/p&gt;
+&lt;p&gt;Command:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;inspect&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; looking for detail , json form&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;logs&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; inquery process log in background&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ps&lt;/code&gt; inquery running container&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-a&lt;/code&gt; : according terminated &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-q&lt;/code&gt; : only inquery id&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;images&lt;/code&gt; 查本地中的 image&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-q&lt;/code&gt; : only id&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;commit&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; &lt;code&gt;{repository_name:tag}&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;build&lt;/code&gt; build Dockerfile&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;-t&lt;/code&gt; &lt;code&gt;{Tag name}&lt;/code&gt; : add Tag&lt;br&gt;
+&lt;code&gt;login&lt;/code&gt; login docker registry to be ready to push&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Delete all containers&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;docker rm $(docker ps -a -q)&lt;/code&gt; &lt;br&gt;
+&lt;strong&gt;Delete all images&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;docker rmi $(docker images -q)&lt;/code&gt; &lt;br&gt;
+&lt;strong&gt;Login to running container&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;docker exec -it {container_id} bash&lt;/code&gt; &lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Dockerfile&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;FROM&lt;/code&gt; &lt;code&gt;{OS}&lt;/code&gt; &lt;br&gt;
+&lt;code&gt;RUN&lt;/code&gt; &lt;code&gt;{shell_command}&lt;/code&gt; command on build image&lt;br&gt;
+&lt;code&gt;CMD&lt;/code&gt; &lt;code&gt;{shell_command}&lt;/code&gt; command after container build&lt;br&gt;
+&lt;code&gt;COPY&lt;/code&gt; &lt;code&gt;{localfile_path}&lt;/code&gt; &lt;code&gt;{container_path}&lt;/code&gt; cp指令&lt;br&gt;
+&lt;code&gt;ADD&lt;/code&gt; 類似wget之類的透過URL下載，可以自動解壓縮，但是非必要建議COPY&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Docker Compose Commands&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;docker compose up&lt;/code&gt; starts up all the containers. &lt;br&gt;
+&lt;code&gt;docker compose ps&lt;/code&gt; checks the status of the containers managed by docker compose. &lt;br&gt;
+&lt;code&gt;docker compose logs&lt;/code&gt; outputs colored and aggregated logs for the compose-managed &lt;br&gt;
+containers. &lt;br&gt;
+&lt;code&gt;docker compose logs&lt;/code&gt;  &lt;code&gt;-f&lt;/code&gt; outputs appended log when the log grows. &lt;br&gt;
+&lt;code&gt;docker compose logs&lt;/code&gt; &lt;code&gt;{container name}&lt;/code&gt; in the end outputs the logs of a specific &lt;br&gt;
+container. &lt;br&gt;
+&lt;code&gt;docker compose stop&lt;/code&gt; stops all the running containers without removing them. &lt;br&gt;
+&lt;code&gt;docker compose rm&lt;/code&gt; removes all the containers.&lt;br&gt;
+&lt;code&gt;docker compose build&lt;/code&gt; rebuilds all the images.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Docker-compose 不需要做link，內部的port根據services名稱方便管理跟開關功能&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</content><category term="docker"></category></entry><entry><title></title><link href="http:lacalhost.com/-.html" rel="alternate"></link><published>2017-03-24T15:51:00+08:00</published><updated>2017-03-24T15:51:00+08:00</updated><author><name>Cropse</name></author><id>tag:None,2017-03-24:lacalhost.com/-.html</id><summary type="html"></summary><content type="html">&lt;ul&gt;
 &lt;li&gt;先做venv&lt;br&gt;
 &lt;code&gt;python3.5 -m venv VENV&lt;/code&gt;&lt;br&gt;
 &lt;code&gt;source VENV/bin/activate&lt;/code&gt;&lt;/li&gt;
@@ -23,6 +75,11 @@ pip install ghp-import
 &lt;p&gt;改&lt;code&gt;GITHUB_PAGES_BRANCH=gh-pages&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;在&lt;code&gt;github: publish&lt;/code&gt;後面加入:&lt;br&gt;
 &lt;code&gt;pelican content -o output -s publishconf.py&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;em&gt; 裝theme:&lt;br&gt;
+&lt;code&gt;pelican-themes --install {theme_path}&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;-l&lt;/code&gt;:list theme installed&lt;br&gt;
+&lt;/em&gt;pelicanconf.py&lt;/em&gt;:&lt;br&gt;
+&lt;code&gt;THEME = '{theme-name}'&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;pip install markdown_checklist&lt;/code&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;MARKDOWN = {
     &amp;#39;extension_configs&amp;#39;: {
@@ -63,4 +120,266 @@ Genetator 是透過yield簡單產生一個iterator的方法(method)&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://docs.python.org/3/tutorial/classes.html?#iterators"&gt;官方document這樣形容generators&lt;/a&gt;&lt;br&gt;
 &lt;strong&gt;Generators are a simple and powerful tool for creating iterators&lt;/strong&gt;&lt;br&gt;
 Anything that can be done with generators can also be done with class-based iterators as described in the previous section. What makes generators so compact is that the &lt;code&gt;__iter__()&lt;/code&gt;and &lt;code&gt;__next__()&lt;/code&gt; methods are created automatically.&lt;/p&gt;
-&lt;p&gt;之後用法大致上都相同，都具備有&lt;a href="https://docs.python.org/3/glossary.html#term-iterable"&gt;&lt;strong&gt;iterable&lt;/strong&gt;的特性&lt;/a&gt;，雖然在用&lt;code&gt;list()&lt;/code&gt;的時候感覺很像，是因為list有&lt;strong&gt;iterable&lt;/strong&gt;的特性，但是iterator是用完就丟的概念，不能重複提取，好處是在處理時可以不用佔用到記憶體空間，像python2中xrange的用法&lt;/p&gt;</content><category term="python"></category></entry></feed>
+&lt;p&gt;之後用法大致上都相同，都具備有&lt;a href="https://docs.python.org/3/glossary.html#term-iterable"&gt;&lt;strong&gt;iterable&lt;/strong&gt;的特性&lt;/a&gt;，雖然在用&lt;code&gt;list()&lt;/code&gt;的時候感覺很像，是因為list有&lt;strong&gt;iterable&lt;/strong&gt;的特性，但是iterator是用完就丟的概念，不能重複提取，好處是在處理時可以不用佔用到記憶體空間，像python2中xrange的用法&lt;/p&gt;</content><category term="python"></category></entry><entry><title>Circleci範例紀錄</title><link href="http:lacalhost.com/circleci%E7%AF%84%E4%BE%8B%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-02-20T14:40:04+08:00</published><updated>2017-02-20T14:40:04+08:00</updated><author><name>Cropse</name></author><id>tag:None,2017-02-20:lacalhost.com/circleci範例紀錄-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡記錄使用Django_blog 在github每次push時使用circleci跑一次測試，circleci只使用一個專案不用錢(測試時間還是有限制)&lt;br&gt;
+基本上只要用circleci連結到你github的專案，專案有circle.yml就會在每次push時自動跑一次測試&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;circle.yml&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dependencies&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="kd"&gt;override&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kd"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;essential&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dev&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;setuptools&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;pyenv&lt;/span&gt; &lt;span class="n"&gt;global&lt;/span&gt; &lt;span class="mf"&gt;3.6&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;pip3&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;$HOME&lt;/span&gt;&lt;span class="sr"&gt;/Django_Blog/&lt;/span&gt;&lt;span class="n"&gt;requirement_ci&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;txt&lt;/span&gt;
+
+        &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;geckodriver&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="sr"&gt;/mozilla/geckodriver/releases/download/v0.14.0/g&lt;/span&gt;&lt;span class="n"&gt;eckodriver&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;14.0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;linux64&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tar&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;gz&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;tar&lt;/span&gt; &lt;span class="n"&gt;zxf&lt;/span&gt; &lt;span class="n"&gt;geckodriver&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;14.0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;linux64&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;tar&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;gz&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;chmod&lt;/span&gt; &lt;span class="mi"&gt;755&lt;/span&gt; &lt;span class="n"&gt;geckodriver&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="n"&gt;geckodriver&lt;/span&gt; &lt;span class="sr"&gt;/usr/local/bin/&lt;/span&gt;
+&lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="kd"&gt;override&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt; &lt;span class="n"&gt;$HOME&lt;/span&gt;&lt;span class="sr"&gt;/Django_Blog/src/&lt;/span&gt;&lt;span class="n"&gt;manage&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;py&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="n"&gt;posts&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;python3&lt;/span&gt; &lt;span class="n"&gt;$HOME&lt;/span&gt;&lt;span class="sr"&gt;/Django_Blog/src/&lt;/span&gt;&lt;span class="n"&gt;manage&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;py&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="n"&gt;pages&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;這裡注意到幾點&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://askubuntu.com/questions/870530/how-to-install-geckodriver-in-ubuntu"&gt;selenium的geckodriver問題&lt;/a&gt;，所以寫起來有點長&lt;/li&gt;
+&lt;li&gt;Django test 需要指定app 測試，不然不會跑&lt;/li&gt;
+&lt;li&gt;python3有很多版本，所以需要&lt;code&gt;pyenv global 3.6.0&lt;/code&gt; 做指定&lt;/li&gt;
+&lt;li&gt;可以rebuild with SSH, 跑完最後會有一組ssh讓你連進去debug&lt;/li&gt;
+&lt;li&gt;連進去在$HOME 的路徑下，所以寫config記得加該路徑&lt;/li&gt;
+&lt;li&gt;requirement另外寫一個，因為deploy不用selenium，測試端也不用uwsgi或是nginx&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Docker版本的之後再寫，先把docker-compose寫完再說&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Reference link&lt;/strong&gt;&lt;br&gt;
+&lt;a href="https://circleci.com/docs/configuration/"&gt;Docs&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://samkuo.me/post/2015/10/eavatar-circleci-continuous-integration/"&gt;山姆大的教學&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://blog.amowu.com/2015/04/devops-continuous-integration-delivery-docker-circleci-aws-beanstalk.html"&gt;DevOps：持續整合＆持續交付（Docker、CircleCI、AWS）&lt;/a&gt;&lt;/p&gt;</content><category term="CI/CD"></category><category term="selenium"></category><category term="testcase"></category><category term="deploy"></category></entry><entry><title>Selenium 試玩心得</title><link href="http:lacalhost.com/selenium-%E8%A9%A6%E7%8E%A9%E5%BF%83%E5%BE%97-.html" rel="alternate"></link><published>2017-02-18T15:42:57+08:00</published><updated>2017-02-18T15:42:57+08:00</updated><author><name>Cropse</name></author><id>tag:None,2017-02-18:lacalhost.com/selenium-試玩心得-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;簡單紀錄一下有遇到的問題：&lt;/p&gt;
+&lt;h4&gt;遇到這個Error log&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;Unexpected Exception: Error: cross-process JS call failed.&lt;/code&gt;&lt;br&gt;
+&lt;a href="https://addons.mozilla.org/en-US/firefox/addon/flow-control/?src=dp-dl-othersby"&gt;安裝這個插件&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;安裝geckodriver&lt;/h3&gt;
+&lt;p&gt;另外需要安裝geckodriver才能從執行，不然會有error&lt;br&gt;
+&lt;code&gt;selenium.common.exceptions.WebDriverException: Message: 'geckodriver' executable needs to be in PATH.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;https://github.com/mozilla/geckodriver/releases&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;echo $PATH&lt;/code&gt; 看一下執行路徑&lt;br&gt;
+把下載下來的執行檔丟進路徑內(我丟進&lt;code&gt;usr/local/bin&lt;/code&gt; on OSX)&lt;/p&gt;
+&lt;h3&gt;plugin&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Selenium Expert (Selenium IDE)&lt;/li&gt;
+&lt;li&gt;Selenium IDE&lt;/li&gt;
+&lt;li&gt;Selenium IDE Button&lt;/li&gt;
+&lt;li&gt;Selenium IDE: Flow Control&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最後記得安裝seletinum&lt;br&gt;
+&lt;code&gt;pip install seletinum&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;開始使用&lt;/h3&gt;
+&lt;p&gt;因為自己測試發現後續更新有些不一樣，這裡測試環境都是OSX，所以前置有踩一點小雷&lt;br&gt;
+操作方式參考以下&lt;br&gt;
+&lt;a href="https://seleniumhq.github.io/selenium/docs/api/py/index.html#introduction"&gt;documentation&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://ithelp.ithome.com.tw/articles/10108684"&gt;CI Server 23 - 使用Selenium進行瀏覽器自動化測試&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://www.youtube.com/watch?v=MQH4Rau_F_A"&gt;如何使用 Selenium 以及 Python 輕鬆抓取 Agoda 的旅館資訊?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;最後IDE可以直接產生unittest，只支援python2，但是實際上簡單的測試用python3也可以直接跑&lt;/p&gt;</content><category term="testcase"></category><category term="selenium"></category></entry><entry><title>Deploy設定簡單紀錄</title><link href="http:lacalhost.com/deploy%E8%A8%AD%E5%AE%9A%E7%B0%A1%E5%96%AE%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-02-07T17:40:05+08:00</published><updated>2017-02-07T17:40:05+08:00</updated><author><name>Cropse</name></author><id>tag:None,2017-02-07:lacalhost.com/deploy設定簡單紀錄-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡大概整理一下整個網站deploy的過程,等下次在詳細整理s3跟ec2設定的部分&lt;/p&gt;
+&lt;p&gt;django專案名稱是&lt;strong&gt;src&lt;/strong&gt;, 路徑放置在&lt;strong&gt;/home/ubuntu/blog&lt;/strong&gt;&lt;br&gt;
+先從配置文件開始&lt;br&gt;
+首先新增一個&lt;code&gt;production.py&lt;/code&gt;在/home/ubuntu/blog/setting/&lt;br&gt;
+以下內容：&lt;/p&gt;
+&lt;hr&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.base&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+
+&lt;span class="c1"&gt;# SECURITY WARNING: keep the secret key used in production secret!&lt;/span&gt;
+&lt;span class="c1"&gt;# 請自己新增一個 不要直接用 http://www.miniwebtool.com/django-secret-key-generator/&lt;/span&gt;
+&lt;span class="n"&gt;SECRET_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;-we5#2la2p=%tj1#w6t(3dgh#1=f8!tx#tmy7khui2yw1$&lt;/span&gt;&lt;span class="si"&gt;%g&lt;/span&gt;&lt;span class="s1"&gt;32&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# SECURITY WARNING: don&amp;#39;t run with debug turned on in production!&lt;/span&gt;
+&lt;span class="n"&gt;DEBUG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 這邊填上網址允許&lt;/span&gt;
+&lt;span class="n"&gt;ALLOWED_HOSTS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 選擇你的db, 這裡用postgresql&lt;/span&gt;
+&lt;span class="n"&gt;DATABASES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;default&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;ENGINE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;django.db.backends.postgresql_psycopg2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;NAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;USER&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;PASSWORD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;HOST&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;PORT&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;5432&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# S3 設定用&lt;/span&gt;
+&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;storages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+
+&lt;span class="n"&gt;STATICFILES_STORAGE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;storages.backends.s3boto3.S3Boto3Storage&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;AWS_REGION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ap-northeast-1&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;AWS_QUERYSTRING_AUTH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;AWS_ACCESS_KEY_ID&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;lt;b&amp;gt;tag&amp;lt;/b&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;AWS_SECRET_ACCESS_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;your access Key&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;AWS_STORAGE_BUCKET_NAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;your s3 bucket name&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;MEDIA_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;http://&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;.s3.amazonaws.com/media/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;AWS_STORAGE_BUCKET_NAME&lt;/span&gt;
+&lt;span class="n"&gt;DEFAULT_FILE_STORAGE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;storages.backends.s3boto3.S3Boto3Storage&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;h1&gt;設定ec2伺服器&lt;/h1&gt;
+&lt;p&gt;在ec2上面開一個ubuntu&lt;br&gt;
+連線後開始安裝套件, 這裡路徑是/home/ubuntu/blog&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class="c1"&gt;# source /home/debian/VENV/bin/activate&lt;/span&gt;
+&lt;span class="c1"&gt;# 先安裝套件&lt;/span&gt;
+apt-get update -y
+apt-get upgrade -y
+apt-get install  nginx uwsgi python3 build-essential python3-dev python3-setuptools python3-pip -y
+apt-get install uwsgi-plugin-python3 -y
+apt-get install libpq-dev -y
+apt-get install postgresql postgresql-contrib -y
+
+apt install awscli -y
+pip3 install uwsgi
+
+&lt;span class="c1"&gt;# application import, 如果專案放github請用git clone&lt;/span&gt;
+aws s3 cp s3://cropse/Blog/ /home/ubuntu/blog --recursive
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;&lt;a href="https://ssorc.tw/242"&gt;PostgreSQL指令集&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://lolikitty.pixnet.net/blog/post/28167655-postgresql-%E6%8C%87%E4%BB%A4"&gt;PostgreSQL 指令&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://ching119.pixnet.net/blog/post/63697343-%E3%80%90%E7%B3%BB%E7%B5%B1%E3%80%91postgresql-%3A-%E8%A8%98%E9%8C%84%E4%B8%80%E4%BA%9B%E8%A8%AD%E5%AE%9A%E5%92%8C%E6%8C%87%E4%BB%A4"&gt;【系統】PostgreSQL : 記錄一些設定和指令&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;設定nginx&lt;/h1&gt;
+&lt;p&gt;接下來設定nginx,剛裝完之後可以直接開80 port檢查demo網頁確認運作正常&lt;br&gt;
+這邊用sock的方式對伺服器做存取而不是設定port&lt;br&gt;
+檔案名稱&lt;code&gt;default&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;upstream&lt;/span&gt; &lt;span class="nt"&gt;django&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;server&lt;/span&gt; &lt;span class="n"&gt;unix&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;///&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sock&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nt"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;listen&lt;/span&gt; &lt;span class="err"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;server_name&lt;/span&gt; &lt;span class="err"&gt;52.68.0.97&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;charset&lt;/span&gt; &lt;span class="err"&gt;utf-8&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;client_max_body_size&lt;/span&gt; &lt;span class="err"&gt;20M&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+
+    &lt;span class="err"&gt;location&lt;/span&gt; &lt;span class="err"&gt;/static&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+          &lt;span class="err"&gt;alias&lt;/span&gt; &lt;span class="err"&gt;/home/ubuntu/blog/static_cdn&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;#&lt;/span&gt;   &lt;span class="nt"&gt;setting&lt;/span&gt; &lt;span class="nt"&gt;in&lt;/span&gt; &lt;span class="nt"&gt;media&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="nt"&gt;static&lt;/span&gt; &lt;span class="nt"&gt;in&lt;/span&gt; &lt;span class="nt"&gt;local&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;    &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;static&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;          &lt;span class="err"&gt;alias&lt;/span&gt; &lt;span class="err"&gt;/home/ubuntu/blog/static_cdn&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;    &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;#&lt;/span&gt;    &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nt"&gt;media&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;          &lt;span class="err"&gt;alias&lt;/span&gt; &lt;span class="err"&gt;/home/ubuntu/blog/media_cdn&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt;    &lt;span class="p"&gt;}&lt;/span&gt;
+
+
+    &lt;span class="nt"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;django&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="err"&gt;127.0.0.1:8080&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;include&lt;/span&gt; &lt;span class="err"&gt;/etc/nginx/uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;接下來設定uwsgi,注意專案名稱跟路徑&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;uwsgi.ini&lt;/code&gt;&lt;br&gt;
+可以用'uwsgi -i uwsgi.ini'先開啟測試&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[uwsgi]&lt;/span&gt;
+&lt;span class="na"&gt;chdir&lt;/span&gt;        &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/home/ubuntu/blog/src&lt;/span&gt;
+&lt;span class="c1"&gt;# Django&amp;#39;s wsgi file&lt;/span&gt;
+&lt;span class="na"&gt;module&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;src.wsgi:application&lt;/span&gt;
+&lt;span class="na"&gt;env&lt;/span&gt;          &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;DJANGO_SETTINGS_MODULE=src.settings.production&lt;/span&gt;
+&lt;span class="c1"&gt;#.production&lt;/span&gt;
+&lt;span class="c1"&gt;# the virtualenv (full path)&lt;/span&gt;
+&lt;span class="c1"&gt;# home         = /home/debian/VENV&lt;/span&gt;
+&lt;span class="c1"&gt;# home         = /usr/bin&lt;/span&gt;
+
+&lt;span class="c1"&gt;# process-related settings&lt;/span&gt;
+&lt;span class="c1"&gt;# master&lt;/span&gt;
+&lt;span class="na"&gt;master&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="c1"&gt;# maximum number of worker processes&lt;/span&gt;
+&lt;span class="na"&gt;processes&lt;/span&gt;    &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;4&lt;/span&gt;
+&lt;span class="c1"&gt;# the socket (use the full path to be safe&lt;/span&gt;
+&lt;span class="na"&gt;socket&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/var/www/demo.sock&lt;/span&gt;
+&lt;span class="c1"&gt;# ... with appropriate permissions - may be needed&lt;/span&gt;
+&lt;span class="na"&gt;chmod-socket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;777&lt;/span&gt;
+&lt;span class="na"&gt;uid&lt;/span&gt;          &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;root&lt;/span&gt;
+&lt;span class="c1"&gt;# gid          = 0&lt;/span&gt;
+&lt;span class="c1"&gt;# clear environment on exit&lt;/span&gt;
+&lt;span class="na"&gt;vacuum&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;h1&gt;寫好uwsgi的service&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html"&gt;Systemd 入门教程：命令篇&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://felix-lin.com/linux/init%E6%BC%94%E5%8C%96%E6%AD%B7%E7%A8%8B-%E8%BD%89%E8%B2%BC-%E6%B7%BA%E6%9E%90-linux-%E5%88%9D%E5%A7%8B%E5%8C%96-init-%E7%B3%BB%E7%B5%B1%EF%BC%8C%E7%AC%AC-3-%E9%83%A8%E5%88%86-systemd/"&gt;init演化歷程 – [轉貼] 淺析 Linux 初始化 init 系統，第 3 部分: Systemd&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
+&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;uWSGI Emperor&lt;/span&gt;
+&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;syslog.target&lt;/span&gt;
+
+&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/local/bin/uwsgi --ini /home/ubuntu/blog/deploy_setting/uwsgi.ini&lt;/span&gt;
+&lt;span class="c1"&gt;# Requires systemd version 211 or newer&lt;/span&gt;
+&lt;span class="na"&gt;RuntimeDirectory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;uwsgi&lt;/span&gt;
+&lt;span class="na"&gt;Restart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;always&lt;/span&gt;
+&lt;span class="na"&gt;KillSignal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;SIGQUIT&lt;/span&gt;
+&lt;span class="na"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;notify&lt;/span&gt;
+&lt;span class="na"&gt;StandardError&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;syslog&lt;/span&gt;
+&lt;span class="na"&gt;NotifyAccess&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;all&lt;/span&gt;
+
+&lt;span class="k"&gt;[Install]&lt;/span&gt;
+&lt;span class="na"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;multi-user.target&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;搬設定檔跟安裝套件&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# install package
+pip3 install -r /home/ubuntu/blog/requirement.txt
+
+#envirment of django settings
+export DJANGO_SETTINGS_MODULE=src.settings.production
+
+
+# nginx setting file
+cp /home/ubuntu/blog/deploy_setting/default /etc/nginx/sites-enabled/default
+
+# create user and collect static file
+python3 manage.py createsuperuser
+python3 manage.py collectstatic --noinput
+
+# uwsgi setting
+cp /home/ubuntu/blog/deploy_setting/emperor.uwsgi.service /etc/systemd/system/emperor.uwsgi.service
+systemctl enable emperor.uwsgi.service
+systemctl start emperor.uwsgi.service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;關於deploy還有很多可以優化的部分(CI/CD), 先手動過一次之後大概了解整個部屬的流程，整個流程再慢慢改善紀錄&lt;/p&gt;</content><category term="AWS"></category><category term="deploy"></category><category term="uwsgi"></category><category term="nginx"></category><category term="postgresql"></category></entry></feed>

@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="shortcut icon" href="http:lacalhost.com/theme/image/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>      Cropse:
+Deploy設定簡單紀錄
+</title>
+  <!-- Latest compiled and minified CSS -->
+
+  
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="http:lacalhost.com/theme/css/base.css">
+
+
+  <style></style>
+  <link rel="stylesheet" type="text/css" href="http:lacalhost.com/theme/css/post_list.css">
+</head>
+<body>
+
+<!--jumbotron && Navigation-->
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" style="color: white">Cropse</a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item ">
+        <a class="nav-link" href="http:lacalhost.com//custom/about_me.html">Home<span class="sr-only">(current)</span></a>
+      </li>      
+      <li class="nav-item ">
+        <a class="nav-link" href="http:lacalhost.com//custom/soundcloud.html">SoundCloud<span class="sr-only">(current)</span></a>
+      </li>      
+      <li class="nav-item ">
+        <a class="nav-link" href="http:lacalhost.com//">Blog<span class="sr-only">(current)</span></a>
+      </li>      
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0" action="/posts">
+      <div class="input-group">
+      <input type="text" class="form-control" name="user_search" value="" placeholder="Search posts">
+      <span class="input-group-btn">
+      <button class="btn btn-primary" type="submit">Search<i class="fa fa-search"></i></button>
+      </span>
+    </form>
+  </div>
+</nav>
+<!-- End -->
+
+<div class="container article">
+  <div class="row">
+  
+  <div class="col-lg-9 col-md-8 col-sm-12">
+    <div class="row">
+        <div class="col-12">
+          <div class="card border-1">
+            <div class="card-block caption post-detail-item">
+              <h2 class="card-header"><a href="http:lacalhost.com/deploy設定簡單紀錄-.html">Deploy設定簡單紀錄</a>
+
+              <small>2017- 2-07</small>
+              </h2>
+              <hr>
+            
+              <div class="card-text">
+                <p>這裡大概整理一下整個網站deploy的過程,等下次在詳細整理s3跟ec2設定的部分</p>
+<p>django專案名稱是<strong>src</strong>, 路徑放置在<strong>/home/ubuntu/blog</strong><br>
+先從配置文件開始<br>
+首先新增一個<code>production.py</code>在/home/ubuntu/blog/setting/<br>
+以下內容：</p>
+<hr>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># SECURITY WARNING: keep the secret key used in production secret!</span>
+<span class="c1"># 請自己新增一個 不要直接用 http://www.miniwebtool.com/django-secret-key-generator/</span>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s1">&#39;-we5#2la2p=%tj1#w6t(3dgh#1=f8!tx#tmy7khui2yw1$</span><span class="si">%g</span><span class="s1">32&#39;</span>
+
+<span class="c1"># SECURITY WARNING: don&#39;t run with debug turned on in production!</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="c1"># 這邊填上網址允許</span>
+<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">]</span>
+
+<span class="c1"># 選擇你的db, 這裡用postgresql</span>
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql_psycopg2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;5432&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># S3 設定用</span>
+<span class="n">INSTALLED_APPS</span><span class="o">+=</span><span class="p">[</span>
+    <span class="s1">&#39;storages&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="n">STATICFILES_STORAGE</span> <span class="o">=</span> <span class="s1">&#39;storages.backends.s3boto3.S3Boto3Storage&#39;</span>
+
+<span class="n">AWS_REGION</span> <span class="o">=</span> <span class="s2">&quot;ap-northeast-1&quot;</span>
+<span class="n">AWS_QUERYSTRING_AUTH</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">AWS_ACCESS_KEY_ID</span> <span class="o">=</span> <span class="s1">&#39;&lt;b&gt;tag&lt;/b&gt;&#39;</span>
+<span class="n">AWS_SECRET_ACCESS_KEY</span> <span class="o">=</span> <span class="s1">&#39;your access Key&#39;</span>
+<span class="n">AWS_STORAGE_BUCKET_NAME</span> <span class="o">=</span> <span class="s1">&#39;your s3 bucket name&#39;</span>
+<span class="n">MEDIA_URL</span> <span class="o">=</span> <span class="s1">&#39;http://</span><span class="si">%s</span><span class="s1">.s3.amazonaws.com/media/&#39;</span> <span class="o">%</span> <span class="n">AWS_STORAGE_BUCKET_NAME</span>
+<span class="n">DEFAULT_FILE_STORAGE</span> <span class="o">=</span> <span class="s1">&#39;storages.backends.s3boto3.S3Boto3Storage&#39;</span>
+</pre></div>
+
+
+<hr>
+<h1>設定ec2伺服器</h1>
+<p>在ec2上面開一個ubuntu<br>
+連線後開始安裝套件, 這裡路徑是/home/ubuntu/blog</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># source /home/debian/VENV/bin/activate</span>
+<span class="c1"># 先安裝套件</span>
+apt-get update -y
+apt-get upgrade -y
+apt-get install  nginx uwsgi python3 build-essential python3-dev python3-setuptools python3-pip -y
+apt-get install uwsgi-plugin-python3 -y
+apt-get install libpq-dev -y
+apt-get install postgresql postgresql-contrib -y
+
+apt install awscli -y
+pip3 install uwsgi
+
+<span class="c1"># application import, 如果專案放github請用git clone</span>
+aws s3 cp s3://cropse/Blog/ /home/ubuntu/blog --recursive
+</pre></div>
+</td></tr></table>
+
+<p><a href="https://ssorc.tw/242">PostgreSQL指令集</a><br>
+<a href="http://lolikitty.pixnet.net/blog/post/28167655-postgresql-%E6%8C%87%E4%BB%A4">PostgreSQL 指令</a><br>
+<a href="http://ching119.pixnet.net/blog/post/63697343-%E3%80%90%E7%B3%BB%E7%B5%B1%E3%80%91postgresql-%3A-%E8%A8%98%E9%8C%84%E4%B8%80%E4%BA%9B%E8%A8%AD%E5%AE%9A%E5%92%8C%E6%8C%87%E4%BB%A4">【系統】PostgreSQL : 記錄一些設定和指令</a></p>
+<h1>設定nginx</h1>
+<p>接下來設定nginx,剛裝完之後可以直接開80 port檢查demo網頁確認運作正常<br>
+這邊用sock的方式對伺服器做存取而不是設定port<br>
+檔案名稱<code>default</code></p>
+<div class="highlight"><pre><span></span><span class="nt">upstream</span> <span class="nt">django</span> <span class="p">{</span>
+    <span class="err">server</span> <span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">demo</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">server</span> <span class="p">{</span>
+    <span class="err">listen</span> <span class="err">80</span><span class="p">;</span>
+    <span class="err">server_name</span> <span class="err">52.68.0.97</span><span class="p">;</span>
+    <span class="err">charset</span> <span class="err">utf-8</span><span class="p">;</span>
+    <span class="err">client_max_body_size</span> <span class="err">20M</span><span class="p">;</span>
+
+
+    <span class="err">location</span> <span class="err">/static</span> <span class="err">{</span>
+          <span class="err">alias</span> <span class="err">/home/ubuntu/blog/static_cdn</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="err">#</span>   <span class="nt">setting</span> <span class="nt">in</span> <span class="nt">media</span> <span class="nt">and</span> <span class="nt">static</span> <span class="nt">in</span> <span class="nt">local</span>
+<span class="err">#</span>    <span class="nt">location</span> <span class="o">/</span><span class="nt">static</span> <span class="p">{</span>
+<span class="err">#</span>          <span class="err">alias</span> <span class="err">/home/ubuntu/blog/static_cdn</span><span class="p">;</span>
+<span class="err">#</span>    <span class="p">}</span>
+
+<span class="err">#</span>    <span class="nt">location</span> <span class="o">/</span><span class="nt">media</span> <span class="p">{</span>
+<span class="err">#</span>          <span class="err">alias</span> <span class="err">/home/ubuntu/blog/media_cdn</span><span class="p">;</span>
+<span class="err">#</span>    <span class="p">}</span>
+
+
+    <span class="nt">location</span> <span class="o">/</span> <span class="p">{</span>
+        <span class="err">uwsgi_pass</span> <span class="err">django</span><span class="p">;</span>
+        <span class="err">#</span> <span class="err">uwsgi_pass</span> <span class="err">127.0.0.1:8080</span><span class="p">;</span>
+        <span class="err">include</span> <span class="err">/etc/nginx/uwsgi_params</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="err">}</span>
+</pre></div>
+
+
+<h1>接下來設定uwsgi,注意專案名稱跟路徑</h1>
+<p><code>uwsgi.ini</code><br>
+可以用'uwsgi -i uwsgi.ini'先開啟測試</p>
+<div class="highlight"><pre><span></span><span class="k">[uwsgi]</span>
+<span class="na">chdir</span>        <span class="o">=</span> <span class="s">/home/ubuntu/blog/src</span>
+<span class="c1"># Django&#39;s wsgi file</span>
+<span class="na">module</span>       <span class="o">=</span> <span class="s">src.wsgi:application</span>
+<span class="na">env</span>          <span class="o">=</span> <span class="s">DJANGO_SETTINGS_MODULE=src.settings.production</span>
+<span class="c1">#.production</span>
+<span class="c1"># the virtualenv (full path)</span>
+<span class="c1"># home         = /home/debian/VENV</span>
+<span class="c1"># home         = /usr/bin</span>
+
+<span class="c1"># process-related settings</span>
+<span class="c1"># master</span>
+<span class="na">master</span>       <span class="o">=</span> <span class="s">true</span>
+<span class="c1"># maximum number of worker processes</span>
+<span class="na">processes</span>    <span class="o">=</span> <span class="s">4</span>
+<span class="c1"># the socket (use the full path to be safe</span>
+<span class="na">socket</span>       <span class="o">=</span> <span class="s">/var/www/demo.sock</span>
+<span class="c1"># ... with appropriate permissions - may be needed</span>
+<span class="na">chmod-socket</span> <span class="o">=</span> <span class="s">777</span>
+<span class="na">uid</span>          <span class="o">=</span> <span class="s">root</span>
+<span class="c1"># gid          = 0</span>
+<span class="c1"># clear environment on exit</span>
+<span class="na">vacuum</span>       <span class="o">=</span> <span class="s">true</span>
+</pre></div>
+
+
+<hr>
+<h1>寫好uwsgi的service</h1>
+<p><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html">Systemd 入门教程：命令篇</a><br>
+<a href="http://felix-lin.com/linux/init%E6%BC%94%E5%8C%96%E6%AD%B7%E7%A8%8B-%E8%BD%89%E8%B2%BC-%E6%B7%BA%E6%9E%90-linux-%E5%88%9D%E5%A7%8B%E5%8C%96-init-%E7%B3%BB%E7%B5%B1%EF%BC%8C%E7%AC%AC-3-%E9%83%A8%E5%88%86-systemd/">init演化歷程 – [轉貼] 淺析 Linux 初始化 init 系統，第 3 部分: Systemd</a></p>
+<div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">uWSGI Emperor</span>
+<span class="na">After</span><span class="o">=</span><span class="s">syslog.target</span>
+
+<span class="k">[Service]</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/uwsgi --ini /home/ubuntu/blog/deploy_setting/uwsgi.ini</span>
+<span class="c1"># Requires systemd version 211 or newer</span>
+<span class="na">RuntimeDirectory</span><span class="o">=</span><span class="s">uwsgi</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="na">KillSignal</span><span class="o">=</span><span class="s">SIGQUIT</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">notify</span>
+<span class="na">StandardError</span><span class="o">=</span><span class="s">syslog</span>
+<span class="na">NotifyAccess</span><span class="o">=</span><span class="s">all</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre></div>
+
+
+<h1>搬設定檔跟安裝套件</h1>
+<div class="highlight"><pre><span></span># install package
+pip3 install -r /home/ubuntu/blog/requirement.txt
+
+#envirment of django settings
+export DJANGO_SETTINGS_MODULE=src.settings.production
+
+
+# nginx setting file
+cp /home/ubuntu/blog/deploy_setting/default /etc/nginx/sites-enabled/default
+
+# create user and collect static file
+python3 manage.py createsuperuser
+python3 manage.py collectstatic --noinput
+
+# uwsgi setting
+cp /home/ubuntu/blog/deploy_setting/emperor.uwsgi.service /etc/systemd/system/emperor.uwsgi.service
+systemctl enable emperor.uwsgi.service
+systemctl start emperor.uwsgi.service
+</pre></div>
+
+
+<p>關於deploy還有很多可以優化的部分(CI/CD), 先手動過一次之後大概了解整個部屬的流程，整個流程再慢慢改善紀錄</p>
+              </div>
+
+              <p id="card-tag">Tag:                 <a href="http:lacalhost.com/tag/aws.html" class="badge btn-primary">AWS</a>
+                <a href="http:lacalhost.com/tag/deploy.html" class="badge btn-primary">deploy</a>
+                <a href="http:lacalhost.com/tag/uwsgi.html" class="badge btn-primary">uwsgi</a>
+                <a href="http:lacalhost.com/tag/nginx.html" class="badge btn-primary">nginx</a>
+                <a href="http:lacalhost.com/tag/postgresql.html" class="badge btn-primary">postgresql</a>
+              </p>              
+            </div>
+          </div>
+          <hr>
+        </div>
+    </div>
+  </div>
+
+<!-- Side Bar -->
+<div class="col-lg-3 col-md-4 ">
+<div class="row">
+  <div class="col-12">
+    <div class="fb-page hidden-sm-down" data-href="https://www.facebook.com/Cropse-1507642772825208/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+      <blockquote cite="https://www.facebook.com/Cropse-1507642772825208/" class="fb-xfbml-parse-ignore">
+        <a href="https://www.facebook.com/Cropse-1507642772825208/">Cropse</a>
+      </blockquote>
+    </div>
+    <div class="soundcloud-block hidden-sm-down">
+      <iframe width="100%" height="200" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/236913528&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true">
+      </iframe>
+    </div>
+    
+        <div class="tcp-block">
+          
+          <div class="tags-block">
+            <h6>Tag:</h6>
+              <li class="">
+                <a href="?tag_search=AWS">AWS</a>
+              </li>
+              <li class="">
+                <a href="?tag_search=CI/CD">CI/CD</a>
+              </li>
+              <li class="">
+                <a href="?tag_search=postgresql">postgresql</a>
+              </li>
+              <li class="">
+                <a href="?tag_search=uwsgi">uwsgi</a>
+              </li>
+              <li class="">
+                <a href="?tag_search=deploy">deploy</a>
+              </li>
+              <li class="">
+                <a href="?tag_search=docker">docker</a>
+              </li>
+              <li class="">
+                <a href="?tag_search=testcase">testcase</a>
+              </li>
+              <li class="">
+                <a href="?tag_search=python">python</a>
+              </li>
+              <li class="">
+                <a href="?tag_search=nginx">nginx</a>
+              </li>
+              <li class="">
+                <a href="?tag_search=selenium">selenium</a>
+              </li>
+            </ul>
+          </div>
+         
+          
+          <div class="cate-block">
+          <h6>Category:</h6>
+            <ul>
+              <li><a href="http:lacalhost.com/category/cicd.html">CI/CD</a></li>
+              <li><a href="http:lacalhost.com/category/django.html">Django</a></li>
+              <li><a href="http:lacalhost.com/category/docker.html">docker</a></li>
+              <li><a href="http:lacalhost.com/category/posts.html">posts</a></li>
+              <li><a href="http:lacalhost.com/category/python.html">python</a></li>
+            </ul>
+          </div>
+          
+          <nav>
+            <h3>Liens</h3>
+            <ul>
+              <li><a href="#">You can add links in your config file</a></li>
+              <li><a href="#">Another social link</a></li>
+              <li><a href="http://getpelican.com/">Pelican</a></li>
+              <li><a href="http://python.org/">Python.org</a></li>
+              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+              <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+          </nav>
+
+
+        </div>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+<!-- Latest compiled and minified JavaScript -->
+
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script> -->
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script> -->
+
+
+  <style type="text/css">
+    /* 這個元素內嵌在 iframes 裡，有可能造成部分 layout 變形，所以請把它隱藏 */
+  #fb-root {
+      display: none;
+  }
+  .tag-lg {
+    font-size: 22px !important;;
+  }
+  .tag-md {
+    font-size: 15px !important;;
+  }
+  .tag-sm {
+    font-size: 8px !important;; 
+  }
+  /* 讓所有容器的寬度都變成 100% */
+  .fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
+      width: 100% !important;
+  }
+  </style>
+
+  <div id="fb-root"></div>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.8&appId=1085995668162713";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+</body>
+</html>
