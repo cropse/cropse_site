@@ -39,7 +39,7 @@ body {
 }
 
 /*三區塊與字的行高*/
-.tags-block, .cate-block, .post-block {
+.tags-block, .cate-block, .link-block {
     margin-top: 15px;
     padding: 20px;
 }
