@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog - python</title><link href="https://cropse.github.io/cropse_site/" rel="alternate"></link><link href="https://cropse.github.io/cropse_site/feeds/python.atom.xml" rel="self"></link><id>https://cropse.github.io/cropse_site/</id><updated>2017-03-24T15:51:00+08:00</updated><entry><title>pelican紀錄</title><link href="https://cropse.github.io/cropse_site/pelican%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-03-24T15:51:00+08:00</published><updated>2017-03-24T15:51:00+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-24:/cropse_site/pelican紀錄-.html</id><summary type="html"></summary><content type="html">&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog - python</title><link href="https://cropse.github.io/cropse_site/" rel="alternate"></link><link href="https://cropse.github.io/cropse_site/feeds/python.atom.xml" rel="self"></link><id>https://cropse.github.io/cropse_site/</id><updated>2017-03-24T15:51:00+08:00</updated><entry><title>pelican紀錄</title><link href="https://cropse.github.io/cropse_site/pelican%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-03-24T15:51:00+08:00</published><updated>2017-03-24T15:51:00+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-24:/cropse_site/pelican紀錄-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡簡單紀錄一下pelican設定步驟&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;先做venv&lt;br&gt;
 &lt;code&gt;python3.5 -m venv VENV&lt;/code&gt;&lt;br&gt;
 &lt;code&gt;source VENV/bin/activate&lt;/code&gt;&lt;/li&gt;
@@ -13,21 +14,25 @@ pip install ghp-import
 
 &lt;p&gt;快速設定&lt;br&gt;
 &lt;code&gt;pelican-quickstart&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;建一個repository，這裡用gp-pages的方式，所以名稱自訂&lt;br&gt;
+&lt;p&gt;建一個repository，這裡用gp-pages的方式，所以名稱自訂&lt;br&gt;
 初始化一個git&lt;br&gt;
 &lt;code&gt;git init&lt;/code&gt;&lt;br&gt;
-&lt;code&gt;git remote add origin {你的專案.git}&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;code&gt;git remote add origin {你的專案.git}&lt;/code&gt;&lt;br&gt;
+之後使用&lt;code&gt;sh develop_server.sh start&lt;/code&gt;就可以執行&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;自我喜好設定&lt;/h2&gt;
 &lt;p&gt;開啟&lt;em&gt;Makefile&lt;/em&gt;:&lt;/p&gt;
 &lt;p&gt;改&lt;code&gt;GITHUB_PAGES_BRANCH=gh-pages&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;在&lt;code&gt;github: publish&lt;/code&gt;後面加入:&lt;br&gt;
-&lt;code&gt;pelican content -o output -s publishconf.py&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&lt;em&gt; 裝theme:&lt;br&gt;
-&lt;code&gt;pelican-themes --install {theme_path}&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;pelican content -o output -s publishconf.py&lt;/code&gt;&lt;br&gt;
+這樣每次只要&lt;code&gt;make github&lt;/code&gt;，就會自動產生publish版本的到content，之後再推到github上&lt;/p&gt;
+&lt;h2&gt;設定檔&lt;/h2&gt;
+&lt;h3&gt;裝theme:&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;pelican-themes --install {theme_path}&lt;/code&gt;&lt;br&gt;
 &lt;code&gt;-l&lt;/code&gt;:list theme installed&lt;br&gt;
-&lt;/em&gt;pelicanconf.py&lt;/em&gt;:&lt;br&gt;
+&lt;em&gt;pelicanconf.py&lt;/em&gt;:&lt;br&gt;
 &lt;code&gt;THEME = '{theme-name}'&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;markdown中使用extension&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;pip install markdown_checklist&lt;/code&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;MARKDOWN = {
     &amp;#39;extension_configs&amp;#39;: {
@@ -39,7 +44,20 @@ pip install ghp-import
     },
     &amp;#39;output_format&amp;#39;: &amp;#39;html5&amp;#39;,
 }
-&lt;/pre&gt;&lt;/div&gt;</content><category term="funny"></category></entry><entry><title>Python iterator&amp;generator</title><link href="https://cropse.github.io/cropse_site/python-iteratorgenerator-.html" rel="alternate"></link><published>2017-03-24T11:39:49+08:00</published><updated>2017-03-24T11:39:49+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-24:/cropse_site/python-iteratorgenerator-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;先講結論：&lt;br&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;增加參數在theme中可以直接使用&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;MENUITEMS = [
+    (&amp;#39;Home&amp;#39;, &amp;#39;/custom/about_me.html&amp;#39;),
+    (&amp;#39;SoundCloud&amp;#39;, &amp;#39;/custom/soundcloud.html&amp;#39;),
+    (&amp;#39;Blog&amp;#39;, &amp;#39;/&amp;#39;),
+    ]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;之後template中可以直接使用 {% for name,url in MENUITEMS %}&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://docs.getpelican.com/en/stable/index.html"&gt;詳細參考&lt;/a&gt;&lt;/p&gt;</content><category term="funny"></category></entry><entry><title>Python iterator&amp;generator</title><link href="https://cropse.github.io/cropse_site/python-iteratorgenerator-.html" rel="alternate"></link><published>2017-03-24T11:39:49+08:00</published><updated>2017-03-24T11:39:49+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-24:/cropse_site/python-iteratorgenerator-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;先講結論：&lt;br&gt;
 Iterator 是透過一個class 內部宣告&lt;code&gt;__iter__&lt;/code&gt;還有&lt;code&gt;__next__&lt;/code&gt;(python2 是&lt;code&gt;next&lt;/code&gt;)方法來達成可迭代(iterable)的物件(class)&lt;br&gt;
 Genetator 是透過yield簡單產生一個iterator的方法(method)&lt;/p&gt;
 &lt;p&gt;這是一般的iterator&lt;/p&gt;
