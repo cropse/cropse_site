@@ -16,6 +16,7 @@ pelican紀錄
   <link rel="stylesheet" type="text/css" href="https://cropse.github.io/cropse_site/theme/css/base.css">
 
   <link rel="stylesheet" type="text/css" href="https://cropse.github.io/cropse_site/theme/css/post_list.css">
+  <link rel="stylesheet" type="text/css" href="https://cropse.github.io/cropse_site/theme/css/post_detail.css">
 </head>
 <body>
 
@@ -86,7 +87,7 @@ pip install ghp-import
 <code>git remote add origin {你的專案.git}</code><br>
 之後使用<code>sh develop_server.sh start</code>就可以執行</p>
 <hr>
-<h2>自我喜好設定</h2>
+<h2>喜好設定</h2>
 <p>開啟<em>Makefile</em>:</p>
 <p>改<code>GITHUB_PAGES_BRANCH=gh-pages</code></p>
 <p>在<code>github: publish</code>後面加入:<br>
@@ -128,6 +129,30 @@ pip install ghp-import
 
 <p>之後template中可以直接使用 {% for name,url in MENUITEMS %}</p>
 <p><a href="http://docs.getpelican.com/en/stable/index.html">詳細參考</a></p>
+<hr>
+<h3>使用route53做DNS</h3>
+<p>在cropse.com上面設定A Type<br>
+Value:</p>
+<blockquote>
+<p>192.30.252.153<br>
+192.30.252.154</p>
+</blockquote>
+<p>在www.cropse.com裡面設定CNAME Type<br>
+Value:</p>
+<blockquote>
+<p>cropse.github.io</p>
+</blockquote>
+<p>之後在github增加一個CNAME檔</p>
+<blockquote>
+<p>www.cropse.com</p>
+</blockquote>
+<p>在github-&gt;settings:<br>
+會顯示：</p>
+<blockquote>
+<p>GitHub Pages<br>
+Your site is published at http://www.cropse.com/</p>
+</blockquote>
+<p><a href="http://kayakuguri.github.io/blog/2015/03/10/set-subdomain/">參考</a></p>
               </div>
 
               <p id="card-tag">Tag:                 <a href="https://cropse.github.io/cropse_site/tag/funny.html" class="badge btn-primary">funny</a>
@@ -158,19 +183,13 @@ pip install ghp-import
           <div class="tags-block">
             <h6>Tag:</h6>
               <li class="">
-                <a href="https://cropse.github.io/cropse_site/tag/funny.html">funny</a>
-              </li>
-              <li class="">
-                <a href="https://cropse.github.io/cropse_site/tag/nginx.html">nginx</a>
+                <a href="https://cropse.github.io/cropse_site/tag/docker.html">docker</a>
               </li>
               <li class="">
                 <a href="https://cropse.github.io/cropse_site/tag/uwsgi.html">uwsgi</a>
               </li>
               <li class="">
-                <a href="https://cropse.github.io/cropse_site/tag/postgresql.html">postgresql</a>
-              </li>
-              <li class="">
-                <a href="https://cropse.github.io/cropse_site/tag/aws.html">AWS</a>
+                <a href="https://cropse.github.io/cropse_site/tag/funny.html">funny</a>
               </li>
               <li class="">
                 <a href="https://cropse.github.io/cropse_site/tag/testcase.html">testcase</a>
@@ -179,16 +198,22 @@ pip install ghp-import
                 <a href="https://cropse.github.io/cropse_site/tag/selenium.html">selenium</a>
               </li>
               <li class="">
-                <a href="https://cropse.github.io/cropse_site/tag/docker.html">docker</a>
+                <a href="https://cropse.github.io/cropse_site/tag/cicd.html">CI/CD</a>
               </li>
               <li class="">
-                <a href="https://cropse.github.io/cropse_site/tag/deploy.html">deploy</a>
+                <a href="https://cropse.github.io/cropse_site/tag/aws.html">AWS</a>
               </li>
               <li class="">
                 <a href="https://cropse.github.io/cropse_site/tag/python.html">python</a>
               </li>
               <li class="">
-                <a href="https://cropse.github.io/cropse_site/tag/cicd.html">CI/CD</a>
+                <a href="https://cropse.github.io/cropse_site/tag/deploy.html">deploy</a>
+              </li>
+              <li class="">
+                <a href="https://cropse.github.io/cropse_site/tag/postgresql.html">postgresql</a>
+              </li>
+              <li class="">
+                <a href="https://cropse.github.io/cropse_site/tag/nginx.html">nginx</a>
               </li>
             </ul>
           </div>

@@ -20,7 +20,7 @@ pip install ghp-import
 &lt;code&gt;git remote add origin {你的專案.git}&lt;/code&gt;&lt;br&gt;
 之後使用&lt;code&gt;sh develop_server.sh start&lt;/code&gt;就可以執行&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2&gt;自我喜好設定&lt;/h2&gt;
+&lt;h2&gt;喜好設定&lt;/h2&gt;
 &lt;p&gt;開啟&lt;em&gt;Makefile&lt;/em&gt;:&lt;/p&gt;
 &lt;p&gt;改&lt;code&gt;GITHUB_PAGES_BRANCH=gh-pages&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;在&lt;code&gt;github: publish&lt;/code&gt;後面加入:&lt;br&gt;
@@ -61,7 +61,31 @@ pip install ghp-import
 
 
 &lt;p&gt;之後template中可以直接使用 {% for name,url in MENUITEMS %}&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://docs.getpelican.com/en/stable/index.html"&gt;詳細參考&lt;/a&gt;&lt;/p&gt;</content><category term="funny"></category></entry><entry><title>FreeNas 安裝紀錄</title><link href="https://cropse.github.io/cropse_site/FreeNas-.html" rel="alternate"></link><published>2017-04-05T15:30:18+08:00</published><updated>2017-04-05T15:30:18+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-04-05:/cropse_site/FreeNas-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡整理用FreeNas的一些心得&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://docs.getpelican.com/en/stable/index.html"&gt;詳細參考&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;使用route53做DNS&lt;/h3&gt;
+&lt;p&gt;在cropse.com上面設定A Type&lt;br&gt;
+Value:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;192.30.252.153&lt;br&gt;
+192.30.252.154&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在www.cropse.com裡面設定CNAME Type&lt;br&gt;
+Value:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;cropse.github.io&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;之後在github增加一個CNAME檔&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;www.cropse.com&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在github-&amp;gt;settings:&lt;br&gt;
+會顯示：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;GitHub Pages&lt;br&gt;
+Your site is published at http://www.cropse.com/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="http://kayakuguri.github.io/blog/2015/03/10/set-subdomain/"&gt;參考&lt;/a&gt;&lt;/p&gt;</content><category term="funny"></category></entry><entry><title>FreeNas 安裝紀錄</title><link href="https://cropse.github.io/cropse_site/FreeNas-.html" rel="alternate"></link><published>2017-04-05T15:30:18+08:00</published><updated>2017-04-05T15:30:18+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-04-05:/cropse_site/FreeNas-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡整理用FreeNas的一些心得&lt;/p&gt;
 &lt;p&gt;用&lt;code&gt;?&lt;/code&gt;跟&lt;code&gt;help&lt;/code&gt;來查詢可用的指令，像是選單的方式&lt;br&gt;
 所以如果要直接回到主選單直接敲&lt;code&gt;\&lt;/code&gt;就好，剩下基本上跟GUI操作會差不多&lt;br&gt;
 EX: &lt;code&gt;network interface bridge2 delete&lt;/code&gt;&lt;/p&gt;
@@ -73,7 +97,7 @@ shell裡面使用cli:&lt;br&gt;
 &lt;a href="http://www.freenas.org/blog/freenas-cli-preview/"&gt;FreeNas CLI&lt;/a&gt;&lt;br&gt;
 &lt;a href="https://doc.freenas.org/9.3/freenas_cli.html#megacli"&gt;FreeNas utilties&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;有裝LSI的卡可以在shell裡面用&lt;code&gt;MegaCli&lt;/code&gt;指令，不過MSM這類的功能可能要自己刻，因為想要做一個硬碟有問題就寄信跟IFTTT通知我手機的功能，對FreeBSD跟MegaCli還不是太熟，所以有時間在嘗試看看&lt;/p&gt;
-&lt;p&gt;目前測試docker用GUI都還有點問題，等穩定一點在整理目前用的服務&lt;/p&gt;</content></entry><entry><title>設定nginx proxy tls/ssl server</title><link href="https://cropse.github.io/cropse_site/%E8%A8%AD%E5%AE%9Anginx-proxy-tlsssl-server-.html" rel="alternate"></link><published>2017-03-30T11:13:12+08:00</published><updated>2017-03-30T11:13:12+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-30:/cropse_site/設定nginx-proxy-tlsssl-server-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;http在資料傳遞過程中沒有進行加密的動作，所以有中間人擷取到敏感資料的問題，&lt;a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB"&gt;中間人攻擊&lt;/a&gt;（Man-in-the-middle attack，縮寫：MITM），所以需要SSL跟TLS做加密的動作&lt;br&gt;
+&lt;p&gt;目前測試docker用GUI都還有點問題，等穩定一點在整理目前用的服務&lt;/p&gt;</content><category term="funny"></category></entry><entry><title>設定nginx proxy tls/ssl server</title><link href="https://cropse.github.io/cropse_site/%E8%A8%AD%E5%AE%9Anginx-proxy-tlsssl-server-.html" rel="alternate"></link><published>2017-03-30T11:13:12+08:00</published><updated>2017-03-30T11:13:12+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-30:/cropse_site/設定nginx-proxy-tlsssl-server-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;http在資料傳遞過程中沒有進行加密的動作，所以有中間人擷取到敏感資料的問題，&lt;a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB"&gt;中間人攻擊&lt;/a&gt;（Man-in-the-middle attack，縮寫：MITM），所以需要SSL跟TLS做加密的動作&lt;br&gt;
 80是一般http通用接口，443是https的接口，所以其實只要在443port上加入ssl憑證就可以了&lt;br&gt;
 Ref:&lt;a href="https://blog.gtwang.org/linux/nginx-create-and-install-ssl-certificate-on-ubuntu-linux/"&gt;NGINX 設定 HTTPS 網頁加密連線，建立自行簽署的 SSL 憑證&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;使用openssl產生ssl憑證&lt;br&gt;
@@ -126,7 +150,7 @@ Ref:&lt;a href="https://blog.gtwang.org/linux/nginx-create-and-install-ssl-certi
 
 
 &lt;p&gt;但是ssl不會有憑證，需要跟發放憑證的供應商買，所以有&lt;strong&gt;Let's Encrypt&lt;/strong&gt;這家免費提供ssl的公司，&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.peterdavehello.org/2015/10/build-an-a-plus-best-practice-https-web-server-via-nginx-chinese-version/"&gt;用 nginx 建置一個 A+ 等級的 https 網頁伺服器&lt;/a&gt;&lt;/p&gt;</content></entry><entry><title>用Docker取代python的venv</title><link href="https://cropse.github.io/cropse_site/%E7%94%A8docker%E5%8F%96%E4%BB%A3python%E7%9A%84venv-.html" rel="alternate"></link><published>2017-03-28T14:09:30+08:00</published><updated>2017-03-28T14:09:30+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-28:/cropse_site/用docker取代python的venv-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;alpine&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.peterdavehello.org/2015/10/build-an-a-plus-best-practice-https-web-server-via-nginx-chinese-version/"&gt;用 nginx 建置一個 A+ 等級的 https 網頁伺服器&lt;/a&gt;&lt;/p&gt;</content><category term="nginx"></category><category term="deploy"></category></entry><entry><title>用Docker取代python的venv</title><link href="https://cropse.github.io/cropse_site/%E7%94%A8docker%E5%8F%96%E4%BB%A3python%E7%9A%84venv-.html" rel="alternate"></link><published>2017-03-28T14:09:30+08:00</published><updated>2017-03-28T14:09:30+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-28:/cropse_site/用docker取代python的venv-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;alpine&lt;/p&gt;
 &lt;p&gt;apk update&lt;br&gt;
 apk add python3&lt;/p&gt;</content><category term="docker"></category><category term="python"></category></entry><entry><title>Docker cheat sheet</title><link href="https://cropse.github.io/cropse_site/docker-cheat-sheet-.html" rel="alternate"></link><published>2017-03-24T17:41:37+08:00</published><updated>2017-03-24T17:41:37+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-24:/cropse_site/docker-cheat-sheet-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Useage:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker &lt;span class="p"&gt;[&lt;/span&gt;option&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;Command&lt;span class="p"&gt;}&lt;/span&gt;
