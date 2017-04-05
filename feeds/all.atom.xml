@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog</title><link href="https://cropse.github.io/cropse_site/" rel="alternate"></link><link href="https://cropse.github.io/cropse_site/feeds/all.atom.xml" rel="self"></link><id>https://cropse.github.io/cropse_site/</id><updated>2017-04-05T15:30:18+08:00</updated><entry><title>FreeNas 安裝紀錄</title><link href="https://cropse.github.io/cropse_site/FreeNas-.html" rel="alternate"></link><published>2017-04-05T15:30:18+08:00</published><updated>2017-04-05T15:30:18+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-04-05:/cropse_site/FreeNas-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡整理用FreeNas的一些心得&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog</title><link href="https://cropse.github.io/cropse_site/" rel="alternate"></link><link href="https://cropse.github.io/cropse_site/feeds/all.atom.xml" rel="self"></link><id>https://cropse.github.io/cropse_site/</id><updated>2017-04-05T16:05:36+08:00</updated><entry><title>pelican紀錄</title><link href="https://cropse.github.io/cropse_site/pelican%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-04-05T16:05:36+08:00</published><updated>2017-04-05T16:05:36+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-04-05:/cropse_site/pelican紀錄-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡簡單紀錄一下pelican設定步驟&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先做venv&lt;br&gt;
+&lt;code&gt;python3.5 -m venv VENV&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;source VENV/bin/activate&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;安裝套件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install pelican
+pip install Markdown
+pip install ghp-import
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;快速設定&lt;br&gt;
+&lt;code&gt;pelican-quickstart&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;建一個repository，這裡用gp-pages的方式，所以名稱自訂&lt;br&gt;
+初始化一個git&lt;br&gt;
+&lt;code&gt;git init&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;git remote add origin {你的專案.git}&lt;/code&gt;&lt;br&gt;
+之後使用&lt;code&gt;sh develop_server.sh start&lt;/code&gt;就可以執行&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;自我喜好設定&lt;/h2&gt;
+&lt;p&gt;開啟&lt;em&gt;Makefile&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;改&lt;code&gt;GITHUB_PAGES_BRANCH=gh-pages&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;github: publish&lt;/code&gt;後面加入:&lt;br&gt;
+&lt;code&gt;pelican content -o output -s publishconf.py&lt;/code&gt;&lt;br&gt;
+這樣每次只要&lt;code&gt;make github&lt;/code&gt;，就會自動產生publish版本的到content，之後再推到github上&lt;/p&gt;
+&lt;h2&gt;設定檔&lt;/h2&gt;
+&lt;h3&gt;裝theme:&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;pelican-themes --install {theme_path}&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;-l&lt;/code&gt;:list theme installed&lt;br&gt;
+&lt;em&gt;pelicanconf.py&lt;/em&gt;:&lt;br&gt;
+&lt;code&gt;THEME = '{theme-name}'&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;markdown中使用extension&lt;/h3&gt;
+&lt;ul class="checklist"&gt;
+&lt;li&gt;&lt;input type="checkbox" disabled checked&gt; 想要加check-box&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;pip install markdown_checklist&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;MARKDOWN = {
+    &amp;#39;extension_configs&amp;#39;: {
+        &amp;#39;markdown.extensions.codehilite&amp;#39;: {&amp;#39;css_class&amp;#39;: &amp;#39;highlight&amp;#39;},
+        &amp;#39;markdown.extensions.extra&amp;#39;: {},
+        &amp;#39;markdown.extensions.meta&amp;#39;: {},
+        &amp;#39;markdown_checklist.extension&amp;#39;:{},
+        &amp;#39;markdown.extensions.nl2br&amp;#39;:{},
+    },
+    &amp;#39;output_format&amp;#39;: &amp;#39;html5&amp;#39;,
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;增加參數在theme中可以直接使用&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;MENUITEMS = [
+    (&amp;#39;Home&amp;#39;, &amp;#39;/custom/about_me.html&amp;#39;),
+    (&amp;#39;SoundCloud&amp;#39;, &amp;#39;/custom/soundcloud.html&amp;#39;),
+    (&amp;#39;Blog&amp;#39;, &amp;#39;/&amp;#39;),
+    ]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;之後template中可以直接使用 {% for name,url in MENUITEMS %}&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://docs.getpelican.com/en/stable/index.html"&gt;詳細參考&lt;/a&gt;&lt;/p&gt;</content><category term="funny"></category></entry><entry><title>FreeNas 安裝紀錄</title><link href="https://cropse.github.io/cropse_site/FreeNas-.html" rel="alternate"></link><published>2017-04-05T15:30:18+08:00</published><updated>2017-04-05T15:30:18+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-04-05:/cropse_site/FreeNas-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡整理用FreeNas的一些心得&lt;/p&gt;
 &lt;p&gt;用&lt;code&gt;?&lt;/code&gt;跟&lt;code&gt;help&lt;/code&gt;來查詢可用的指令，像是選單的方式&lt;br&gt;
 所以如果要直接回到主選單直接敲&lt;code&gt;\&lt;/code&gt;就好，剩下基本上跟GUI操作會差不多&lt;br&gt;
 EX: &lt;code&gt;network interface bridge2 delete&lt;/code&gt;&lt;/p&gt;
@@ -11,7 +73,7 @@ shell裡面使用cli:&lt;br&gt;
 &lt;a href="http://www.freenas.org/blog/freenas-cli-preview/"&gt;FreeNas CLI&lt;/a&gt;&lt;br&gt;
 &lt;a href="https://doc.freenas.org/9.3/freenas_cli.html#megacli"&gt;FreeNas utilties&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;有裝LSI的卡可以在shell裡面用&lt;code&gt;MegaCli&lt;/code&gt;指令，不過MSM這類的功能可能要自己刻，因為想要做一個硬碟有問題就寄信跟IFTTT通知我手機的功能，對FreeBSD跟MegaCli還不是太熟，所以有時間在嘗試看看&lt;/p&gt;
-&lt;p&gt;目前測試docker用GUI都還有點問題，等穩定一點在整理目前用的服務心得&lt;/p&gt;</content></entry><entry><title>設定nginx proxy tls/ssl server</title><link href="https://cropse.github.io/cropse_site/%E8%A8%AD%E5%AE%9Anginx-proxy-tlsssl-server-.html" rel="alternate"></link><published>2017-03-30T11:13:12+08:00</published><updated>2017-03-30T11:13:12+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-30:/cropse_site/設定nginx-proxy-tlsssl-server-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;http在資料傳遞過程中沒有進行加密的動作，所以有中間人擷取到敏感資料的問題，&lt;a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB"&gt;中間人攻擊&lt;/a&gt;（Man-in-the-middle attack，縮寫：MITM），所以需要SSL跟TLS做加密的動作&lt;br&gt;
+&lt;p&gt;目前測試docker用GUI都還有點問題，等穩定一點在整理目前用的服務&lt;/p&gt;</content></entry><entry><title>設定nginx proxy tls/ssl server</title><link href="https://cropse.github.io/cropse_site/%E8%A8%AD%E5%AE%9Anginx-proxy-tlsssl-server-.html" rel="alternate"></link><published>2017-03-30T11:13:12+08:00</published><updated>2017-03-30T11:13:12+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-30:/cropse_site/設定nginx-proxy-tlsssl-server-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;http在資料傳遞過程中沒有進行加密的動作，所以有中間人擷取到敏感資料的問題，&lt;a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB"&gt;中間人攻擊&lt;/a&gt;（Man-in-the-middle attack，縮寫：MITM），所以需要SSL跟TLS做加密的動作&lt;br&gt;
 80是一般http通用接口，443是https的接口，所以其實只要在443port上加入ssl憑證就可以了&lt;br&gt;
 Ref:&lt;a href="https://blog.gtwang.org/linux/nginx-create-and-install-ssl-certificate-on-ubuntu-linux/"&gt;NGINX 設定 HTTPS 網頁加密連線，建立自行簽署的 SSL 憑證&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;使用openssl產生ssl憑證&lt;br&gt;
@@ -163,65 +225,7 @@ container. &lt;br&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Volume 在dokcerfile無法指定local path&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;
 指定local path會把container path的資料清空，需要注意一下&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://dockone.io/article/128"&gt;深入理解Docker Volume（一）&lt;/a&gt;&lt;br&gt;
-&lt;a href="http://julianchu.net/2016/04/19-docker.html"&gt;Docker volume 簡單用法&lt;/a&gt;&lt;/p&gt;</content><category term="docker"></category></entry><entry><title>pelican紀錄</title><link href="https://cropse.github.io/cropse_site/pelican%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-03-24T15:51:00+08:00</published><updated>2017-03-24T15:51:00+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-24:/cropse_site/pelican紀錄-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡簡單紀錄一下pelican設定步驟&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;先做venv&lt;br&gt;
-&lt;code&gt;python3.5 -m venv VENV&lt;/code&gt;&lt;br&gt;
-&lt;code&gt;source VENV/bin/activate&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;安裝套件&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install pelican
-pip install Markdown
-pip install ghp-import
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;快速設定&lt;br&gt;
-&lt;code&gt;pelican-quickstart&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;建一個repository，這裡用gp-pages的方式，所以名稱自訂&lt;br&gt;
-初始化一個git&lt;br&gt;
-&lt;code&gt;git init&lt;/code&gt;&lt;br&gt;
-&lt;code&gt;git remote add origin {你的專案.git}&lt;/code&gt;&lt;br&gt;
-之後使用&lt;code&gt;sh develop_server.sh start&lt;/code&gt;就可以執行&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;自我喜好設定&lt;/h2&gt;
-&lt;p&gt;開啟&lt;em&gt;Makefile&lt;/em&gt;:&lt;/p&gt;
-&lt;p&gt;改&lt;code&gt;GITHUB_PAGES_BRANCH=gh-pages&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;在&lt;code&gt;github: publish&lt;/code&gt;後面加入:&lt;br&gt;
-&lt;code&gt;pelican content -o output -s publishconf.py&lt;/code&gt;&lt;br&gt;
-這樣每次只要&lt;code&gt;make github&lt;/code&gt;，就會自動產生publish版本的到content，之後再推到github上&lt;/p&gt;
-&lt;h2&gt;設定檔&lt;/h2&gt;
-&lt;h3&gt;裝theme:&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;pelican-themes --install {theme_path}&lt;/code&gt;&lt;br&gt;
-&lt;code&gt;-l&lt;/code&gt;:list theme installed&lt;br&gt;
-&lt;em&gt;pelicanconf.py&lt;/em&gt;:&lt;br&gt;
-&lt;code&gt;THEME = '{theme-name}'&lt;/code&gt;&lt;/p&gt;
-&lt;h3&gt;markdown中使用extension&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;pip install markdown_checklist&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;MARKDOWN = {
-    &amp;#39;extension_configs&amp;#39;: {
-        &amp;#39;markdown.extensions.codehilite&amp;#39;: {&amp;#39;css_class&amp;#39;: &amp;#39;highlight&amp;#39;},
-        &amp;#39;markdown.extensions.extra&amp;#39;: {},
-        &amp;#39;markdown.extensions.meta&amp;#39;: {},
-        &amp;#39;markdown_checklist.extension&amp;#39;:{},
-        &amp;#39;markdown.extensions.nl2br&amp;#39;:{},
-    },
-    &amp;#39;output_format&amp;#39;: &amp;#39;html5&amp;#39;,
-}
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;h3&gt;增加參數在theme中可以直接使用&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;MENUITEMS = [
-    (&amp;#39;Home&amp;#39;, &amp;#39;/custom/about_me.html&amp;#39;),
-    (&amp;#39;SoundCloud&amp;#39;, &amp;#39;/custom/soundcloud.html&amp;#39;),
-    (&amp;#39;Blog&amp;#39;, &amp;#39;/&amp;#39;),
-    ]
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;之後template中可以直接使用 {% for name,url in MENUITEMS %}&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://docs.getpelican.com/en/stable/index.html"&gt;詳細參考&lt;/a&gt;&lt;/p&gt;</content><category term="funny"></category></entry><entry><title>Python iterator&amp;generator</title><link href="https://cropse.github.io/cropse_site/python-iteratorgenerator-.html" rel="alternate"></link><published>2017-03-24T11:39:49+08:00</published><updated>2017-03-24T11:39:49+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-24:/cropse_site/python-iteratorgenerator-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;先講結論：&lt;br&gt;
+&lt;a href="http://julianchu.net/2016/04/19-docker.html"&gt;Docker volume 簡單用法&lt;/a&gt;&lt;/p&gt;</content><category term="docker"></category></entry><entry><title>Python iterator&amp;generator</title><link href="https://cropse.github.io/cropse_site/python-iteratorgenerator-.html" rel="alternate"></link><published>2017-03-24T11:39:49+08:00</published><updated>2017-03-24T11:39:49+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-24:/cropse_site/python-iteratorgenerator-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;先講結論：&lt;br&gt;
 Iterator 是透過一個class 內部宣告&lt;code&gt;__iter__&lt;/code&gt;還有&lt;code&gt;__next__&lt;/code&gt;(python2 是&lt;code&gt;next&lt;/code&gt;)方法來達成可迭代(iterable)的物件(class)&lt;br&gt;
 Genetator 是透過yield簡單產生一個iterator的方法(method)&lt;/p&gt;
 &lt;p&gt;這是一般的iterator&lt;/p&gt;
