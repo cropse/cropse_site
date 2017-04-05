@@ -1,43 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Blog - docker</title><link href="https://cropse.github.io/cropse_site/" rel="alternate"></link><link href="https://cropse.github.io/cropse_site/feeds/docker.atom.xml" rel="self"></link><id>https://cropse.github.io/cropse_site/</id><updated>2017-03-24T17:41:37+08:00</updated><entry><title>Docker cheat sheet</title><link href="https://cropse.github.io/cropse_site/docker-cheat-sheet-.html" rel="alternate"></link><published>2017-03-24T17:41:37+08:00</published><updated>2017-03-24T17:41:37+08:00</updated><author><name>Cropse</name></author><id>tag:cropse.github.io,2017-03-24:/cropse_site/docker-cheat-sheet-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Useage:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;docker [option] {Command}&lt;/code&gt;&lt;br&gt;
-    -i interactive mode&lt;br&gt;
-    -t pseudo TTY mode&lt;br&gt;
-    -d background mode&lt;br&gt;
-    -p {local host port}:{container vps port} porting mapping&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker &lt;span class="p"&gt;[&lt;/span&gt;option&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;Command&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="err"&gt;-&lt;/span&gt;i interactive mode
+    &lt;span class="err"&gt;-&lt;/span&gt;t pseudo TTY mode
+    &lt;span class="err"&gt;-&lt;/span&gt;d background mode
+    &lt;span class="err"&gt;-&lt;/span&gt;p &lt;span class="p"&gt;{&lt;/span&gt;local host port&lt;span class="p"&gt;}:{&lt;/span&gt;container vps port&lt;span class="p"&gt;}&lt;/span&gt; porting mapping
+    &lt;span class="err"&gt;-&lt;/span&gt;v &lt;span class="p"&gt;{&lt;/span&gt;Absolute local path&lt;span class="p"&gt;}:{&lt;/span&gt;Absolute container path&lt;span class="p"&gt;}&lt;/span&gt; mount volume
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;背景執行請用 -it -d, 這樣後面就可以用logs去查背景輸出&lt;/p&gt;
-&lt;p&gt;Command:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;inspect&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; looking for detail , json form&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;logs&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; inquery process log in background&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ps&lt;/code&gt; inquery running container&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-a&lt;/code&gt; : according terminated &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-q&lt;/code&gt; : only inquery id&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;images&lt;/code&gt; 查本地中的 image&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-q&lt;/code&gt; : only id&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;commit&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; &lt;code&gt;{repository_name:tag}&lt;/code&gt; &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;build&lt;/code&gt; build Dockerfile&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Command:&lt;br&gt;
+- &lt;code&gt;-p {host port}:{container port}&lt;/code&gt; port forward&lt;br&gt;
+- &lt;code&gt;inspect&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; looking for detail , json form&lt;br&gt;
+- &lt;code&gt;logs&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; inquery process log in background&lt;br&gt;
+- &lt;code&gt;ps&lt;/code&gt; inquery running container&lt;br&gt;
+    - &lt;code&gt;-a&lt;/code&gt; : according terminated &lt;br&gt;
+    - &lt;code&gt;-q&lt;/code&gt; : only inquery id&lt;br&gt;
+- &lt;code&gt;images&lt;/code&gt; 查本地中的 image&lt;br&gt;
+    - &lt;code&gt;-q&lt;/code&gt; : only id&lt;br&gt;
+- &lt;code&gt;commit&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; &lt;code&gt;{repository_name:tag}&lt;/code&gt; &lt;br&gt;
+- &lt;code&gt;build&lt;/code&gt; build Dockerfile&lt;br&gt;
+- &lt;code&gt;rm&lt;/code&gt; delete container &lt;br&gt;
+    - -v, --volumes   Remove the volumes associated with the container&lt;br&gt;
+- &lt;code&gt;rmi&lt;/code&gt; delete image&lt;/p&gt;
+&lt;p&gt;example:&lt;br&gt;
+&lt;code&gt;docker build docker build --tag aiohttp:0.1 .&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;docker run -it -p 9898:80 -v $(pwd)/example:/run aiohttp:0.1 bash&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;-t&lt;/code&gt; &lt;code&gt;{Tag name}&lt;/code&gt; : add Tag&lt;br&gt;
 &lt;code&gt;login&lt;/code&gt; login docker registry to be ready to push&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;docker exec -it {container} {command}&lt;/code&gt;: 繼續執行command&lt;ul&gt;
+&lt;li&gt;ex:&lt;code&gt;docker exec -it test ps aux&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;Delete all containers&lt;/strong&gt;&lt;br&gt;
 &lt;code&gt;docker rm $(docker ps -a -q)&lt;/code&gt; &lt;br&gt;
 &lt;strong&gt;Delete all images&lt;/strong&gt;&lt;br&gt;
-&lt;code&gt;docker rmi $(docker images -q)&lt;/code&gt; &lt;br&gt;
+&lt;code&gt;docker rmi $(docker images -a -q)&lt;/code&gt; &lt;br&gt;
 &lt;strong&gt;Login to running container&lt;/strong&gt;&lt;br&gt;
-&lt;code&gt;docker exec -it {container_id} bash&lt;/code&gt; &lt;/p&gt;
+&lt;code&gt;docker exec -it {container_id} bash&lt;/code&gt; &lt;br&gt;
+&lt;strong&gt;delete all volume not used&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;docker volume rm $(docker volume ls -f 'dangling=true' -q)&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Dokcer Save&amp;amp;Export&lt;/h2&gt;
+&lt;p&gt;可以打包container，打包後直接丟給別人&lt;/p&gt;
+&lt;h3&gt;先講結論：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;export: 打包container出來，image會被合併成一包，使用import匯入&lt;/li&gt;
+&lt;li&gt;save: 把container的紀錄給保存下來，會保留image的紀錄，安裝也是批次安裝，使用load匯入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;使用方法：&lt;/h3&gt;
+&lt;h4&gt;export&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;docker export &lt;code&gt;{container_id}&lt;/code&gt; &amp;gt; export.tar&lt;/li&gt;
+&lt;li&gt;cat export.tar | sudo docker import - &lt;code&gt;{repository_name:tag}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;save&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;docker save &lt;code&gt;{container_id}&lt;/code&gt; &amp;gt; save.tar&lt;/li&gt;
+&lt;li&gt;docker load &amp;lt; save.tar&lt;/li&gt;
+&lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2&gt;Dockerfile&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;FROM&lt;/code&gt; &lt;code&gt;{OS}&lt;/code&gt; &lt;br&gt;
 &lt;code&gt;RUN&lt;/code&gt; &lt;code&gt;{shell_command}&lt;/code&gt; command on build image&lt;br&gt;
 &lt;code&gt;CMD&lt;/code&gt; &lt;code&gt;{shell_command}&lt;/code&gt; command after container build&lt;br&gt;
 &lt;code&gt;COPY&lt;/code&gt; &lt;code&gt;{localfile_path}&lt;/code&gt; &lt;code&gt;{container_path}&lt;/code&gt; cp指令&lt;br&gt;
-&lt;code&gt;ADD&lt;/code&gt; 類似wget之類的透過URL下載，可以自動解壓縮，但是非必要建議COPY&lt;/p&gt;
+&lt;code&gt;ADD&lt;/code&gt; 類似wget之類的透過URL下載，可以自動解壓縮，但是非必要建議COPY&lt;br&gt;
+&lt;code&gt;ENV {key} {value}&lt;/code&gt; set the enveriment&lt;br&gt;
+&lt;code&gt;WORKDIR /path/to/workdir&lt;/code&gt; set Working dir&lt;br&gt;
+&lt;code&gt;EXPOSE {local host port} {container vps port}&lt;/code&gt; 需要加-P才會生效&lt;br&gt;
+&lt;a href="https://chnbohwr.myds.me/wordpress/?p=353"&gt;Dockerfile 解說&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h1&gt;Docker Compose Commands&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;docker compose up&lt;/code&gt; starts up all the containers. &lt;br&gt;
@@ -51,4 +87,13 @@ container. &lt;br&gt;
 &lt;code&gt;docker compose rm&lt;/code&gt; removes all the containers.&lt;br&gt;
 &lt;code&gt;docker compose build&lt;/code&gt; rebuilds all the images.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Docker-compose 不需要做link，內部的port根據services名稱方便管理跟開關功能&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</content><category term="docker"></category></entry></feed>
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Docker-compose 不需要做link，內部的port根據services名稱方便管理跟開關功能&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h1&gt;Note&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;alpine交互指令用bin/sh而不是bin/bash&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Vloume&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Volume 在dokcerfile無法指定local path&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;
+指定local path會把container path的資料清空，需要注意一下&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://dockone.io/article/128"&gt;深入理解Docker Volume（一）&lt;/a&gt;&lt;br&gt;
+&lt;a href="http://julianchu.net/2016/04/19-docker.html"&gt;Docker volume 簡單用法&lt;/a&gt;&lt;/p&gt;</content><category term="docker"></category></entry></feed>

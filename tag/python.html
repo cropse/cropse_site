@@ -3,6 +3,7 @@
 <html>
 <head>
   <link rel="shortcut icon" href="https://cropse.github.io/cropse_site/theme/image/favicon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>      Cropse:
 Post List
@@ -57,6 +58,34 @@ Post List
         <div class="col-12">
           <div class="card border-1">
             <div class="card-block caption post-detail-item">
+              <h2 class="card-header"><a href="https://cropse.github.io/cropse_site/用docker取代python的venv-.html">用Docker取代python的venv</a>
+
+              <small>2017- 3-28</small>
+              </h2>
+              <hr>
+            
+              <div class="card-text">
+                <p>alpine</p>
+<p>apk update<br>
+apk add python3</p>
+              </div>
+
+              <p id="card-tag">Tag:                 <a href="https://cropse.github.io/cropse_site/tag/docker.html" class="badge btn-primary">docker</a>
+                                
+
+                <a href="https://cropse.github.io/cropse_site/tag/python.html" class="badge btn-primary">python</a>
+                                
+
+              </p>
+              <a href="https://cropse.github.io/cropse_site/用docker取代python的venv-.html" class="btn btn-primary btn-lg" id="view">View <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+              
+            </div>
+          </div>
+          <hr>
+        </div>
+        <div class="col-12">
+          <div class="card border-1">
+            <div class="card-block caption post-detail-item">
               <h2 class="card-header"><a href="https://cropse.github.io/cropse_site/python-iteratorgenerator-.html">Python iterator&generator</a>
 
               <small>2017- 3-24</small>
@@ -66,7 +95,14 @@ Post List
               <div class="card-text">
                 <p>先講結論：<br>
 Iterator 是透過一個class 內部宣告<code>__iter__</code>還有<code>__next__</code>(python2 是<code>next</code>)方法來達成可迭代(iterable)的物件(class)<br>
-Genetator 是透過yield簡單產生一個iterator的方法(method)</br></br></p><p>這是一般的iterator</p>
+Genetator 是透過yield簡單產生一個iterator的方法(method)</p>
+<p>這是一般的iterator</p>
+<div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">iterator</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span><span class="o">:</span>
+    <span class="nx">def</span> <span class="nx">__init__</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">stop</span><span class="p">)</span><span class="o">:</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">start</span> <span class="o">=</span> <span class="nx">start</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">stop</span> <span class="o">=</span> <span class="nx">stop</span>
+    <span class="nx">def</span> <span class="nx">__iter__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+        <span class="k">return ...</span></pre></div>
               </div>
 
               <p id="card-tag">Tag:                 <a href="https://cropse.github.io/cropse_site/tag/python.html" class="badge btn-primary">python</a>
@@ -124,37 +160,37 @@ Genetator 是透過yield簡單產生一個iterator的方法(method)</br></br></p
           <div class="tags-block">
             <h6>Tag:</h6>
               <li class="">
-                <a href="?tag_search=docker">docker</a>
+                <a href="https://cropse.github.io/cropse_site/tag/deploy.html">deploy</a>
               </li>
               <li class="">
-                <a href="?tag_search=funny">funny</a>
+                <a href="https://cropse.github.io/cropse_site/tag/cicd.html">CI/CD</a>
               </li>
               <li class="">
-                <a href="?tag_search=postgresql">postgresql</a>
+                <a href="https://cropse.github.io/cropse_site/tag/postgresql.html">postgresql</a>
               </li>
               <li class="">
-                <a href="?tag_search=testcase">testcase</a>
+                <a href="https://cropse.github.io/cropse_site/tag/funny.html">funny</a>
               </li>
               <li class="">
-                <a href="?tag_search=selenium">selenium</a>
+                <a href="https://cropse.github.io/cropse_site/tag/selenium.html">selenium</a>
               </li>
               <li class="">
-                <a href="?tag_search=AWS">AWS</a>
+                <a href="https://cropse.github.io/cropse_site/tag/python.html">python</a>
               </li>
               <li class="">
-                <a href="?tag_search=uwsgi">uwsgi</a>
+                <a href="https://cropse.github.io/cropse_site/tag/testcase.html">testcase</a>
               </li>
               <li class="">
-                <a href="?tag_search=nginx">nginx</a>
+                <a href="https://cropse.github.io/cropse_site/tag/docker.html">docker</a>
               </li>
               <li class="">
-                <a href="?tag_search=CI/CD">CI/CD</a>
+                <a href="https://cropse.github.io/cropse_site/tag/nginx.html">nginx</a>
               </li>
               <li class="">
-                <a href="?tag_search=deploy">deploy</a>
+                <a href="https://cropse.github.io/cropse_site/tag/uwsgi.html">uwsgi</a>
               </li>
               <li class="">
-                <a href="?tag_search=python">python</a>
+                <a href="https://cropse.github.io/cropse_site/tag/aws.html">AWS</a>
               </li>
             </ul>
           </div>
@@ -166,19 +202,13 @@ Genetator 是透過yield簡單產生一個iterator的方法(method)</br></br></p
               <li><a href="https://cropse.github.io/cropse_site/category/cicd.html">CI/CD</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/django.html">Django</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/docker.html">docker</a></li>
+              <li><a href="https://cropse.github.io/cropse_site/category/posts.html">posts</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/python.html">python</a></li>
             </ul>
           </div>
           
           <div class="link-block">
-          <h6>Links:</h6>
             <ul>
-              <li><a href="#">You can add links in your config file</a></li>
-              <li><a href="#">Another social link</a></li>
-              <li><a href="http://getpelican.com/">Pelican</a></li>
-              <li><a href="http://python.org/">Python.org</a></li>
-              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-              <li><a href="#">You can modify those links in your config file</a></li>
             </ul>
           </div>
 

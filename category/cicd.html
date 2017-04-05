@@ -3,6 +3,7 @@
 <html>
 <head>
   <link rel="shortcut icon" href="https://cropse.github.io/cropse_site/theme/image/favicon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>      Cropse:
 Post List
@@ -65,7 +66,13 @@ Post List
             
               <div class="card-text">
                 <p>這裡記錄使用Django_blog 在github每次push時使用circleci跑一次測試，circleci只使用一個專案不用錢(測試時間還是有限制)<br>
-基本上只要用circleci連結到你github的專案，專案有circle.yml就會在每次push時自動跑一次測試</br></p><p><strong>circle.yml</strong></p>
+基本上只要用circleci連結到你github的專案，專案有circle.yml就會在每次push時自動跑一次測試</p>
+<p><strong>circle.yml</strong></p>
+<div class="highlight"><pre><span></span><span class="n">dependencies</span><span class="o">:</span>
+    <span class="kd">override</span><span class="o">:</span>
+        <span class="o">-</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="kd">get</span> <span class="n">install</span> <span class="n">python3</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">python3</span><span class="o">-</span><span class="n">dev</span> <span class="n">python3</span><span class="o">-</span><span class="n">setuptools</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="o">-</span><span class="n">y</span>
+        <span class="o">-</span> <span class="n">pyenv</span> <span class="n">global</span> <span class="mf">3.6</span><span class="o">.</span><span class="mi">0</span>
+        <span class="o">-</span> <span class="n">pip3 ...</span></pre></div>
               </div>
 
               <p id="card-tag">Tag:                 <a href="https://cropse.github.io/cropse_site/tag/cicd.html" class="badge btn-primary">CI/CD</a>
@@ -97,8 +104,14 @@ Post List
               <hr>
             
               <div class="card-text">
-                <p>簡單紀錄一下有遇到的問題：</p><p><code>Unexpected Exception: Error: cross-process JS call failed.</code><br>
-<a href="https://addons.mozilla.org/en-US/firefox/addon/flow-control/?src=dp-dl-othersby">安裝這個插件</a></br></p>
+                <p>簡單紀錄一下有遇到的問題：</p>
+<h4>遇到這個Error log</h4>
+<p><code>Unexpected Exception: Error: cross-process JS call failed.</code><br>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/flow-control/?src=dp-dl-othersby">安裝這個插件</a></p>
+<h3>安裝geckodriver</h3>
+<p>另外需要安裝geckodriver才能從執行，不然會有error<br>
+<code>selenium.common.exceptions.WebDriverException: Message: 'geckodriver' executable needs to be in PATH.</code></p>
+<p>https://github.com/mozilla/geckodriver/releases ...</p>
               </div>
 
               <p id="card-tag">Tag:                 <a href="https://cropse.github.io/cropse_site/tag/testcase.html" class="badge btn-primary">testcase</a>
@@ -159,37 +172,37 @@ Post List
           <div class="tags-block">
             <h6>Tag:</h6>
               <li class="">
-                <a href="?tag_search=docker">docker</a>
+                <a href="https://cropse.github.io/cropse_site/tag/deploy.html">deploy</a>
               </li>
               <li class="">
-                <a href="?tag_search=funny">funny</a>
+                <a href="https://cropse.github.io/cropse_site/tag/cicd.html">CI/CD</a>
               </li>
               <li class="">
-                <a href="?tag_search=postgresql">postgresql</a>
+                <a href="https://cropse.github.io/cropse_site/tag/postgresql.html">postgresql</a>
               </li>
               <li class="">
-                <a href="?tag_search=testcase">testcase</a>
+                <a href="https://cropse.github.io/cropse_site/tag/funny.html">funny</a>
               </li>
               <li class="">
-                <a href="?tag_search=selenium">selenium</a>
+                <a href="https://cropse.github.io/cropse_site/tag/selenium.html">selenium</a>
               </li>
               <li class="">
-                <a href="?tag_search=AWS">AWS</a>
+                <a href="https://cropse.github.io/cropse_site/tag/python.html">python</a>
               </li>
               <li class="">
-                <a href="?tag_search=uwsgi">uwsgi</a>
+                <a href="https://cropse.github.io/cropse_site/tag/testcase.html">testcase</a>
               </li>
               <li class="">
-                <a href="?tag_search=nginx">nginx</a>
+                <a href="https://cropse.github.io/cropse_site/tag/docker.html">docker</a>
               </li>
               <li class="">
-                <a href="?tag_search=CI/CD">CI/CD</a>
+                <a href="https://cropse.github.io/cropse_site/tag/nginx.html">nginx</a>
               </li>
               <li class="">
-                <a href="?tag_search=deploy">deploy</a>
+                <a href="https://cropse.github.io/cropse_site/tag/uwsgi.html">uwsgi</a>
               </li>
               <li class="">
-                <a href="?tag_search=python">python</a>
+                <a href="https://cropse.github.io/cropse_site/tag/aws.html">AWS</a>
               </li>
             </ul>
           </div>
@@ -201,19 +214,13 @@ Post List
               <li><a href="https://cropse.github.io/cropse_site/category/cicd.html">CI/CD</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/django.html">Django</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/docker.html">docker</a></li>
+              <li><a href="https://cropse.github.io/cropse_site/category/posts.html">posts</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/python.html">python</a></li>
             </ul>
           </div>
           
           <div class="link-block">
-          <h6>Links:</h6>
             <ul>
-              <li><a href="#">You can add links in your config file</a></li>
-              <li><a href="#">Another social link</a></li>
-              <li><a href="http://getpelican.com/">Pelican</a></li>
-              <li><a href="http://python.org/">Python.org</a></li>
-              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-              <li><a href="#">You can modify those links in your config file</a></li>
             </ul>
           </div>
 

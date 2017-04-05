@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>      Cropse:
-Post List
+用Docker取代python的venv
 </title>
   <!-- Latest compiled and minified CSS -->
 
@@ -58,73 +58,27 @@ Post List
         <div class="col-12">
           <div class="card border-1">
             <div class="card-block caption post-detail-item">
-              <h2 class="card-header"><a href="https://cropse.github.io/cropse_site/deploy設定簡單紀錄-.html">Deploy設定簡單紀錄</a>
+              <h2 class="card-header"><a href="https://cropse.github.io/cropse_site/用docker取代python的venv-.html">用Docker取代python的venv</a>
 
-              <small>2017- 2-07</small>
+              <small>2017- 3-28</small>
               </h2>
               <hr>
             
               <div class="card-text">
-                <p>這裡大概整理一下整個網站deploy的過程,等下次在詳細整理s3跟ec2設定的部分</p>
-<p>django專案名稱是<strong>src</strong>, 路徑放置在<strong>/home/ubuntu/blog</strong><br>
-先從配置文件開始<br>
-首先新增一個<code>production.py</code>在/home/ubuntu/blog/setting/<br>
-以下內容：</p>
-<hr>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="c1"># SECURITY WARNING: keep the secret key used in production secret!</span>
-<span class="c1"># 請自己新增一個 不要直接用 http://www ...</span></pre></div>
+                <p>alpine</p>
+<p>apk update<br>
+apk add python3</p>
               </div>
 
-              <p id="card-tag">Tag:                 <a href="https://cropse.github.io/cropse_site/tag/aws.html" class="badge btn-primary">AWS</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/deploy.html" class="badge btn-primary">deploy</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/uwsgi.html" class="badge btn-primary">uwsgi</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/nginx.html" class="badge btn-primary">nginx</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/postgresql.html" class="badge btn-primary">postgresql</a>
-                                
-
-              </p>
-              <a href="https://cropse.github.io/cropse_site/deploy設定簡單紀錄-.html" class="btn btn-primary btn-lg" id="view">View <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-              
+              <p id="card-tag">Tag:                 <a href="https://cropse.github.io/cropse_site/tag/docker.html" class="badge btn-primary">docker</a>
+                <a href="https://cropse.github.io/cropse_site/tag/python.html" class="badge btn-primary">python</a>
+              </p>              
             </div>
           </div>
           <hr>
         </div>
-      </div>
-      <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi.html" tabindex="-1">
-              <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi0.html" tabindex="-1">
-              <i class="fa fa-angle-left" aria-hidden="true"></i></a>
-          </li>              <li class="page-item disabled">
-                <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi.html">1</a></li>
-<li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi2.html" tabindex="-1">
-              <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi1.html" tabindex="-1">
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-          </li>
-        </ul>
-      </nav>
+    </div>
   </div>
-
-
 
 <!-- Side Bar -->
 <div class="col-lg-3 col-md-4 ">

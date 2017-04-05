@@ -3,6 +3,7 @@
 <html>
 <head>
   <link rel="shortcut icon" href="https://cropse.github.io/cropse_site/theme/image/favicon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>      Cropse:
 Docker cheat sheet
@@ -65,44 +66,80 @@ Docker cheat sheet
             
               <div class="card-text">
                 <p>Useage:</p>
-<p><code>docker [option] {Command}</code><br>
-    -i interactive mode<br>
-    -t pseudo TTY mode<br>
-    -d background mode<br>
-    -p {local host port}:{container vps port} porting mapping</p>
+<div class="highlight"><pre><span></span>docker <span class="p">[</span>option<span class="p">]</span> <span class="p">{</span>Command<span class="p">}</span>
+    <span class="err">-</span>i interactive mode
+    <span class="err">-</span>t pseudo TTY mode
+    <span class="err">-</span>d background mode
+    <span class="err">-</span>p <span class="p">{</span>local host port<span class="p">}:{</span>container vps port<span class="p">}</span> porting mapping
+    <span class="err">-</span>v <span class="p">{</span>Absolute local path<span class="p">}:{</span>Absolute container path<span class="p">}</span> mount volume
+</pre></div>
+
+
 <p>背景執行請用 -it -d, 這樣後面就可以用logs去查背景輸出</p>
-<p>Command:</p>
-<ul>
-<li><code>inspect</code> <code>{container_id}</code> looking for detail , json form</li>
-<li><code>logs</code> <code>{container_id}</code> inquery process log in background</li>
-<li><code>ps</code> inquery running container<ul>
-<li><code>-a</code> : according terminated </li>
-<li><code>-q</code> : only inquery id</li>
-</ul>
-</li>
-<li><code>images</code> 查本地中的 image<ul>
-<li><code>-q</code> : only id</li>
-</ul>
-</li>
-<li><code>commit</code> <code>{container_id}</code> <code>{repository_name:tag}</code> </li>
-<li><code>build</code> build Dockerfile</li>
-</ul>
+<p>Command:<br>
+- <code>-p {host port}:{container port}</code> port forward<br>
+- <code>inspect</code> <code>{container_id}</code> looking for detail , json form<br>
+- <code>logs</code> <code>{container_id}</code> inquery process log in background<br>
+- <code>ps</code> inquery running container<br>
+    - <code>-a</code> : according terminated <br>
+    - <code>-q</code> : only inquery id<br>
+- <code>images</code> 查本地中的 image<br>
+    - <code>-q</code> : only id<br>
+- <code>commit</code> <code>{container_id}</code> <code>{repository_name:tag}</code> <br>
+- <code>build</code> build Dockerfile<br>
+- <code>rm</code> delete container <br>
+    - -v, --volumes   Remove the volumes associated with the container<br>
+- <code>rmi</code> delete image</p>
+<p>example:<br>
+<code>docker build docker build --tag aiohttp:0.1 .</code><br>
+<code>docker run -it -p 9898:80 -v $(pwd)/example:/run aiohttp:0.1 bash</code></p>
 <p><code>-t</code> <code>{Tag name}</code> : add Tag<br>
 <code>login</code> login docker registry to be ready to push</p>
+<ul>
+<li><code>docker exec -it {container} {command}</code>: 繼續執行command<ul>
+<li>ex:<code>docker exec -it test ps aux</code></li>
+</ul>
+</li>
+</ul>
 <hr>
 <p><strong>Delete all containers</strong><br>
 <code>docker rm $(docker ps -a -q)</code> <br>
 <strong>Delete all images</strong><br>
-<code>docker rmi $(docker images -q)</code> <br>
+<code>docker rmi $(docker images -a -q)</code> <br>
 <strong>Login to running container</strong><br>
-<code>docker exec -it {container_id} bash</code> </p>
+<code>docker exec -it {container_id} bash</code> <br>
+<strong>delete all volume not used</strong><br>
+<code>docker volume rm $(docker volume ls -f 'dangling=true' -q)</code></p>
+<hr>
+<h2>Dokcer Save&amp;Export</h2>
+<p>可以打包container，打包後直接丟給別人</p>
+<h3>先講結論：</h3>
+<ul>
+<li>export: 打包container出來，image會被合併成一包，使用import匯入</li>
+<li>save: 把container的紀錄給保存下來，會保留image的紀錄，安裝也是批次安裝，使用load匯入</li>
+</ul>
+<h3>使用方法：</h3>
+<h4>export</h4>
+<ul>
+<li>docker export <code>{container_id}</code> &gt; export.tar</li>
+<li>cat export.tar | sudo docker import - <code>{repository_name:tag}</code></li>
+</ul>
+<h4>save</h4>
+<ul>
+<li>docker save <code>{container_id}</code> &gt; save.tar</li>
+<li>docker load &lt; save.tar</li>
+</ul>
 <hr>
 <h2>Dockerfile</h2>
 <p><code>FROM</code> <code>{OS}</code> <br>
 <code>RUN</code> <code>{shell_command}</code> command on build image<br>
 <code>CMD</code> <code>{shell_command}</code> command after container build<br>
 <code>COPY</code> <code>{localfile_path}</code> <code>{container_path}</code> cp指令<br>
-<code>ADD</code> 類似wget之類的透過URL下載，可以自動解壓縮，但是非必要建議COPY</p>
+<code>ADD</code> 類似wget之類的透過URL下載，可以自動解壓縮，但是非必要建議COPY<br>
+<code>ENV {key} {value}</code> set the enveriment<br>
+<code>WORKDIR /path/to/workdir</code> set Working dir<br>
+<code>EXPOSE {local host port} {container vps port}</code> 需要加-P才會生效<br>
+<a href="https://chnbohwr.myds.me/wordpress/?p=353">Dockerfile 解說</a></p>
 <hr>
 <h1>Docker Compose Commands</h1>
 <p><code>docker compose up</code> starts up all the containers. <br>
@@ -117,6 +154,15 @@ container. <br>
 <code>docker compose build</code> rebuilds all the images.</p>
 <hr>
 <p><strong><em>Docker-compose 不需要做link，內部的port根據services名稱方便管理跟開關功能</em></strong></p>
+<h1>Note</h1>
+<ul>
+<li>alpine交互指令用bin/sh而不是bin/bash</li>
+</ul>
+<h1>Vloume</h1>
+<p><strong><em>Volume 在dokcerfile無法指定local path</em></strong><br>
+指定local path會把container path的資料清空，需要注意一下</p>
+<p><a href="http://dockone.io/article/128">深入理解Docker Volume（一）</a><br>
+<a href="http://julianchu.net/2016/04/19-docker.html">Docker volume 簡單用法</a></p>
               </div>
 
               <p id="card-tag">Tag:                 <a href="https://cropse.github.io/cropse_site/tag/docker.html" class="badge btn-primary">docker</a>
@@ -147,37 +193,37 @@ container. <br>
           <div class="tags-block">
             <h6>Tag:</h6>
               <li class="">
-                <a href="?tag_search=docker">docker</a>
+                <a href="https://cropse.github.io/cropse_site/tag/deploy.html">deploy</a>
               </li>
               <li class="">
-                <a href="?tag_search=funny">funny</a>
+                <a href="https://cropse.github.io/cropse_site/tag/cicd.html">CI/CD</a>
               </li>
               <li class="">
-                <a href="?tag_search=postgresql">postgresql</a>
+                <a href="https://cropse.github.io/cropse_site/tag/postgresql.html">postgresql</a>
               </li>
               <li class="">
-                <a href="?tag_search=testcase">testcase</a>
+                <a href="https://cropse.github.io/cropse_site/tag/funny.html">funny</a>
               </li>
               <li class="">
-                <a href="?tag_search=selenium">selenium</a>
+                <a href="https://cropse.github.io/cropse_site/tag/selenium.html">selenium</a>
               </li>
               <li class="">
-                <a href="?tag_search=AWS">AWS</a>
+                <a href="https://cropse.github.io/cropse_site/tag/python.html">python</a>
               </li>
               <li class="">
-                <a href="?tag_search=uwsgi">uwsgi</a>
+                <a href="https://cropse.github.io/cropse_site/tag/testcase.html">testcase</a>
               </li>
               <li class="">
-                <a href="?tag_search=nginx">nginx</a>
+                <a href="https://cropse.github.io/cropse_site/tag/docker.html">docker</a>
               </li>
               <li class="">
-                <a href="?tag_search=CI/CD">CI/CD</a>
+                <a href="https://cropse.github.io/cropse_site/tag/nginx.html">nginx</a>
               </li>
               <li class="">
-                <a href="?tag_search=deploy">deploy</a>
+                <a href="https://cropse.github.io/cropse_site/tag/uwsgi.html">uwsgi</a>
               </li>
               <li class="">
-                <a href="?tag_search=python">python</a>
+                <a href="https://cropse.github.io/cropse_site/tag/aws.html">AWS</a>
               </li>
             </ul>
           </div>
@@ -189,19 +235,13 @@ container. <br>
               <li><a href="https://cropse.github.io/cropse_site/category/cicd.html">CI/CD</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/django.html">Django</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/docker.html">docker</a></li>
+              <li><a href="https://cropse.github.io/cropse_site/category/posts.html">posts</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/python.html">python</a></li>
             </ul>
           </div>
           
           <div class="link-block">
-          <h6>Links:</h6>
             <ul>
-              <li><a href="#">You can add links in your config file</a></li>
-              <li><a href="#">Another social link</a></li>
-              <li><a href="http://getpelican.com/">Pelican</a></li>
-              <li><a href="http://python.org/">Python.org</a></li>
-              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-              <li><a href="#">You can modify those links in your config file</a></li>
             </ul>
           </div>
 

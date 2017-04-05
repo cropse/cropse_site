@@ -3,6 +3,7 @@
 <html>
 <head>
   <link rel="shortcut icon" href="https://cropse.github.io/cropse_site/theme/image/favicon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>      Cropse:
 Post List
@@ -64,10 +65,17 @@ Post List
               <hr>
             
               <div class="card-text">
-                <p>這裡大概整理一下整個網站deploy的過程,等下次在詳細整理s3跟ec2設定的部分</p><p>django專案名稱是<strong>src</strong>, 路徑放置在<strong>/home/ubuntu/blog</strong><br>
+                <p>這裡大概整理一下整個網站deploy的過程,等下次在詳細整理s3跟ec2設定的部分</p>
+<p>django專案名稱是<strong>src</strong>, 路徑放置在<strong>/home/ubuntu/blog</strong><br>
 先從配置文件開始<br>
 首先新增一個<code>production.py</code>在/home/ubuntu/blog/setting/<br>
-以下內容：</br></br></br></p>
+以下內容：</p>
+<hr>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># SECURITY WARNING: keep the secret key used in production secret!</span>
+<span class="c1"># 請自己新增一個 不要直接用 http://www ...</span></pre></div>
               </div>
 
               <p id="card-tag">Tag:                 <a href="https://cropse.github.io/cropse_site/tag/aws.html" class="badge btn-primary">AWS</a>
@@ -137,37 +145,37 @@ Post List
           <div class="tags-block">
             <h6>Tag:</h6>
               <li class="">
-                <a href="?tag_search=docker">docker</a>
+                <a href="https://cropse.github.io/cropse_site/tag/deploy.html">deploy</a>
               </li>
               <li class="">
-                <a href="?tag_search=funny">funny</a>
+                <a href="https://cropse.github.io/cropse_site/tag/cicd.html">CI/CD</a>
               </li>
               <li class="">
-                <a href="?tag_search=postgresql">postgresql</a>
+                <a href="https://cropse.github.io/cropse_site/tag/postgresql.html">postgresql</a>
               </li>
               <li class="">
-                <a href="?tag_search=testcase">testcase</a>
+                <a href="https://cropse.github.io/cropse_site/tag/funny.html">funny</a>
               </li>
               <li class="">
-                <a href="?tag_search=selenium">selenium</a>
+                <a href="https://cropse.github.io/cropse_site/tag/selenium.html">selenium</a>
               </li>
               <li class="">
-                <a href="?tag_search=AWS">AWS</a>
+                <a href="https://cropse.github.io/cropse_site/tag/python.html">python</a>
               </li>
               <li class="">
-                <a href="?tag_search=uwsgi">uwsgi</a>
+                <a href="https://cropse.github.io/cropse_site/tag/testcase.html">testcase</a>
               </li>
               <li class="">
-                <a href="?tag_search=nginx">nginx</a>
+                <a href="https://cropse.github.io/cropse_site/tag/docker.html">docker</a>
               </li>
               <li class="">
-                <a href="?tag_search=CI/CD">CI/CD</a>
+                <a href="https://cropse.github.io/cropse_site/tag/nginx.html">nginx</a>
               </li>
               <li class="">
-                <a href="?tag_search=deploy">deploy</a>
+                <a href="https://cropse.github.io/cropse_site/tag/uwsgi.html">uwsgi</a>
               </li>
               <li class="">
-                <a href="?tag_search=python">python</a>
+                <a href="https://cropse.github.io/cropse_site/tag/aws.html">AWS</a>
               </li>
             </ul>
           </div>
@@ -179,19 +187,13 @@ Post List
               <li><a href="https://cropse.github.io/cropse_site/category/cicd.html">CI/CD</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/django.html">Django</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/docker.html">docker</a></li>
+              <li><a href="https://cropse.github.io/cropse_site/category/posts.html">posts</a></li>
               <li><a href="https://cropse.github.io/cropse_site/category/python.html">python</a></li>
             </ul>
           </div>
           
           <div class="link-block">
-          <h6>Links:</h6>
             <ul>
-              <li><a href="#">You can add links in your config file</a></li>
-              <li><a href="#">Another social link</a></li>
-              <li><a href="http://getpelican.com/">Pelican</a></li>
-              <li><a href="http://python.org/">Python.org</a></li>
-              <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-              <li><a href="#">You can modify those links in your config file</a></li>
             </ul>
           </div>
 

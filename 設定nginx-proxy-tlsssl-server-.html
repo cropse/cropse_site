@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>      Cropse:
-Post List
+設定nginx proxy tls/ssl server
 </title>
   <!-- Latest compiled and minified CSS -->
 
@@ -58,73 +58,76 @@ Post List
         <div class="col-12">
           <div class="card border-1">
             <div class="card-block caption post-detail-item">
-              <h2 class="card-header"><a href="https://cropse.github.io/cropse_site/deploy設定簡單紀錄-.html">Deploy設定簡單紀錄</a>
+              <h2 class="card-header"><a href="https://cropse.github.io/cropse_site/設定nginx-proxy-tlsssl-server-.html">設定nginx proxy tls/ssl server</a>
 
-              <small>2017- 2-07</small>
+              <small>2017- 3-30</small>
               </h2>
               <hr>
             
               <div class="card-text">
-                <p>這裡大概整理一下整個網站deploy的過程,等下次在詳細整理s3跟ec2設定的部分</p>
-<p>django專案名稱是<strong>src</strong>, 路徑放置在<strong>/home/ubuntu/blog</strong><br>
-先從配置文件開始<br>
-首先新增一個<code>production.py</code>在/home/ubuntu/blog/setting/<br>
-以下內容：</p>
-<hr>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">os</span>
+                <p>http在資料傳遞過程中沒有進行加密的動作，所以有中間人擷取到敏感資料的問題，<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB">中間人攻擊</a>（Man-in-the-middle attack，縮寫：MITM），所以需要SSL跟TLS做加密的動作<br>
+80是一般http通用接口，443是https的接口，所以其實只要在443port上加入ssl憑證就可以了<br>
+Ref:<a href="https://blog.gtwang.org/linux/nginx-create-and-install-ssl-certificate-on-ubuntu-linux/">NGINX 設定 HTTPS 網頁加密連線，建立自行簽署的 SSL 憑證</a></p>
+<p>使用openssl產生ssl憑證<br>
+<code>sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt</code></p>
+<ul>
+<li>req：使用 X.509 Certificate Signing Request（CSR） Management 產生憑證。</li>
+<li>-x509：建立自行簽署的憑證。</li>
+<li>-nodes：不要使用密碼保護，因為這個憑證是 NGINX 伺服器要使用的，如果設定密碼的話，會讓伺服器每次在啟動時書需要輸入密碼。</li>
+<li>-days 365：設定憑證的使用期限，單位是天，如果不想時常重新產生憑證，可以設長一點。</li>
+<li>-newkey rsa:2048：同時產生新的 RSA 2048 位元的金鑰。</li>
+<li>-keyout：設定金鑰儲存的位置。</li>
+<li>-out：設定憑證儲存的位置。</li>
+</ul>
+<p>依照順序填：<br>
+1. 國家代碼，台灣就填 TW。<br>
+2. 州或省，台灣就填 Taiwan。<br>
+3. 城市，例如台北就填 Taipei。<br>
+4. 公司名稱。<br>
+5. 部門名稱。<br>
+6. 伺服器的 FQDN，這個一定要填寫正確，如果沒有申請網域名稱的話，也可以用 IP 位址替代。<br>
+7. E-mail 信箱。</p>
+<div class="highlight"><pre><span></span>server {
+  # 加入 SSL 設定
+  listen 443 ssl default_server;
+  listen [::]:443 ssl default_server;
 
-<span class="c1"># SECURITY WARNING: keep the secret key used in production secret!</span>
-<span class="c1"># 請自己新增一個 不要直接用 http://www ...</span></pre></div>
+  # 憑證與金鑰的路徑
+  ssl_certificate /etc/nginx/ssl/nginx.crt;
+  ssl_certificate_key /etc/nginx/ssl/nginx.key;
+
+  # .....
+}
+</pre></div>
+
+
+<p>但是有使用者從http連進來，所以需要從80轉到443，<code>permanent</code>是http 301，讓瀏覽器重新訪問<br>
+- permanent(301):永久性重新定向，對搜尋引擎友好<br>
+- redirect(302):臨時性重新定向<br>
+- last：将rewrite后的地址重新在server标签执行。<br>
+- break：将rewrite后地址重新在当前的location标签执行。<br>
+<a href="http://www.netingcn.com/nginx-rewrite-flag.html">关于nginx rewrtie的四种flag</a></p>
+<div class="highlight"><pre><span></span><span class="nt">server</span> <span class="p">{</span>
+  <span class="err">listen</span> <span class="err">80</span> <span class="err">default_server</span><span class="p">;</span>
+  <span class="n">listen</span> <span class="cp">[</span><span class="p">::</span><span class="cp">]</span><span class="p">:</span><span class="mi">80</span> <span class="n">default_server</span><span class="p">;</span>
+
+  <span class="err">#</span> <span class="err">導向至</span> <span class="err">HTTPS</span>
+  <span class="err">rewrite</span> <span class="err">^(.*)</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="err">$</span><span class="n">host</span><span class="err">$</span><span class="mi">1</span> <span class="n">permanent</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>但是ssl不會有憑證，需要跟發放憑證的供應商買，所以有<strong>Let's Encrypt</strong>這家免費提供ssl的公司，</p>
+<p><a href="https://www.peterdavehello.org/2015/10/build-an-a-plus-best-practice-https-web-server-via-nginx-chinese-version/">用 nginx 建置一個 A+ 等級的 https 網頁伺服器</a></p>
               </div>
 
-              <p id="card-tag">Tag:                 <a href="https://cropse.github.io/cropse_site/tag/aws.html" class="badge btn-primary">AWS</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/deploy.html" class="badge btn-primary">deploy</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/uwsgi.html" class="badge btn-primary">uwsgi</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/nginx.html" class="badge btn-primary">nginx</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/postgresql.html" class="badge btn-primary">postgresql</a>
-                                
-
-              </p>
-              <a href="https://cropse.github.io/cropse_site/deploy設定簡單紀錄-.html" class="btn btn-primary btn-lg" id="view">View <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-              
+              <p id="card-tag">Tag:               </p>              
             </div>
           </div>
           <hr>
         </div>
-      </div>
-      <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi.html" tabindex="-1">
-              <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi0.html" tabindex="-1">
-              <i class="fa fa-angle-left" aria-hidden="true"></i></a>
-          </li>              <li class="page-item disabled">
-                <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi.html">1</a></li>
-<li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi2.html" tabindex="-1">
-              <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi1.html" tabindex="-1">
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-          </li>
-        </ul>
-      </nav>
+    </div>
   </div>
-
-
 
 <!-- Side Bar -->
 <div class="col-lg-3 col-md-4 ">

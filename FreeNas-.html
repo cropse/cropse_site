@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>      Cropse:
-Post List
+FreeNas 安裝紀錄
 </title>
   <!-- Latest compiled and minified CSS -->
 
@@ -58,73 +58,35 @@ Post List
         <div class="col-12">
           <div class="card border-1">
             <div class="card-block caption post-detail-item">
-              <h2 class="card-header"><a href="https://cropse.github.io/cropse_site/deploy設定簡單紀錄-.html">Deploy設定簡單紀錄</a>
+              <h2 class="card-header"><a href="https://cropse.github.io/cropse_site/FreeNas-.html">FreeNas 安裝紀錄</a>
 
-              <small>2017- 2-07</small>
+              <small>2017- 4-05</small>
               </h2>
               <hr>
             
               <div class="card-text">
-                <p>這裡大概整理一下整個網站deploy的過程,等下次在詳細整理s3跟ec2設定的部分</p>
-<p>django專案名稱是<strong>src</strong>, 路徑放置在<strong>/home/ubuntu/blog</strong><br>
-先從配置文件開始<br>
-首先新增一個<code>production.py</code>在/home/ubuntu/blog/setting/<br>
-以下內容：</p>
-<hr>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="c1"># SECURITY WARNING: keep the secret key used in production secret!</span>
-<span class="c1"># 請自己新增一個 不要直接用 http://www ...</span></pre></div>
+                <p>這裡整理用FreeNas的一些心得</p>
+<p>用<code>?</code>跟<code>help</code>來查詢可用的指令，像是選單的方式<br>
+所以如果要直接回到主選單直接敲<code>\</code>就好，剩下基本上跟GUI操作會差不多<br>
+EX: <code>network interface bridge2 delete</code></p>
+<p>敲<code>shell</code>直接進sh，在shell敲<code>cli</code>回到FreeNas CLI，細節參考以下連結<br>
+shell裡面使用cli:<br>
+<code>cli -e "network interface show"</code><br>
+同理在cli使用shell:<br>
+<code>shell "ls -al"</code><br>
+<a href="http://www.freenas.org/blog/freenas-cli-preview/">FreeNas CLI</a><br>
+<a href="https://doc.freenas.org/9.3/freenas_cli.html#megacli">FreeNas utilties</a></p>
+<p>有裝LSI的卡可以在shell裡面用<code>MegaCli</code>指令，不過MSM這類的功能可能要自己刻，因為想要做一個硬碟有問題就寄信跟IFTTT通知我手機的功能，對FreeBSD跟MegaCli還不是太熟，所以有時間在嘗試看看</p>
+<p>目前測試docker用GUI都還有點問題，等穩定一點在整理目前用的服務心得</p>
               </div>
 
-              <p id="card-tag">Tag:                 <a href="https://cropse.github.io/cropse_site/tag/aws.html" class="badge btn-primary">AWS</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/deploy.html" class="badge btn-primary">deploy</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/uwsgi.html" class="badge btn-primary">uwsgi</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/nginx.html" class="badge btn-primary">nginx</a>
-                                
-
-                <a href="https://cropse.github.io/cropse_site/tag/postgresql.html" class="badge btn-primary">postgresql</a>
-                                
-
-              </p>
-              <a href="https://cropse.github.io/cropse_site/deploy設定簡單紀錄-.html" class="btn btn-primary btn-lg" id="view">View <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-              
+              <p id="card-tag">Tag:               </p>              
             </div>
           </div>
           <hr>
         </div>
-      </div>
-      <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi.html" tabindex="-1">
-              <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi0.html" tabindex="-1">
-              <i class="fa fa-angle-left" aria-hidden="true"></i></a>
-          </li>              <li class="page-item disabled">
-                <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi.html">1</a></li>
-<li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi2.html" tabindex="-1">
-              <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="https://cropse.github.io/cropse_site/tag/uwsgi1.html" tabindex="-1">
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-          </li>
-        </ul>
-      </nav>
+    </div>
   </div>
-
-
 
 <!-- Side Bar -->
 <div class="col-lg-3 col-md-4 ">
