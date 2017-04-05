@@ -146,6 +146,12 @@ Value:</p>
 <blockquote>
 <p>www.cropse.com</p>
 </blockquote>
+<p>但是每次執行都會被覆蓋掉，所以在<code>makefile</code> 修改ghp-import，增加-c參數<br>
+<code>-c CNAME    Write a CNAME file with the given CNAME.</code><br>
+這裡用我的網址www.cropse.com</p>
+<blockquote>
+<p>ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) -c www.cropse.com $(OUTPUTDIR)</p>
+</blockquote>
 <p>在github-&gt;settings:<br>
 會顯示：</p>
 <blockquote>
@@ -183,37 +189,37 @@ Your site is published at http://www.cropse.com/</p>
           <div class="tags-block">
             <h6>Tag:</h6>
               <li class="">
-                <a href="http://www.cropse.com/tag/uwsgi.html">uwsgi</a>
-              </li>
-              <li class="">
                 <a href="http://www.cropse.com/tag/cicd.html">CI/CD</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/selenium.html">selenium</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/postgresql.html">postgresql</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/nginx.html">nginx</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/aws.html">AWS</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/docker.html">docker</a>
+                <a href="http://www.cropse.com/tag/nginx.html">nginx</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/deploy.html">deploy</a>
+                <a href="http://www.cropse.com/tag/uwsgi.html">uwsgi</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/testcase.html">testcase</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/selenium.html">selenium</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/funny.html">funny</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/python.html">python</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/postgresql.html">postgresql</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/deploy.html">deploy</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/docker.html">docker</a>
               </li>
             </ul>
           </div>
