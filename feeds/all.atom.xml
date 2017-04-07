@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog</title><link href="http://www.cropse.com/" rel="alternate"></link><link href="http://www.cropse.com/feeds/all.atom.xml" rel="self"></link><id>http://www.cropse.com/</id><updated>2017-04-05T16:05:36+08:00</updated><entry><title>pelican紀錄</title><link href="http://www.cropse.com/pelican%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-04-05T16:05:36+08:00</published><updated>2017-04-05T16:05:36+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-04-05:/pelican紀錄-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡簡單紀錄一下pelican設定步驟&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog</title><link href="http://www.cropse.com/" rel="alternate"></link><link href="http://www.cropse.com/feeds/all.atom.xml" rel="self"></link><id>http://www.cropse.com/</id><updated>2017-04-05T16:05:36+08:00</updated><entry><title>pelican紀錄</title><link href="http://www.cropse.com/pelican%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-04-05T16:05:36+08:00</published><updated>2017-04-05T16:05:36+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-04-05:/pelican紀錄-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡簡單紀錄一下pelican設定步驟，紀錄的很隨便，主要是給自己看的，因為整個主題跟功能大多是自己刻的，所以過程會相對複雜一點&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;先做venv&lt;br&gt;
 &lt;code&gt;python3.5 -m venv VENV&lt;/code&gt;&lt;br&gt;
@@ -91,7 +91,28 @@ Value:&lt;/p&gt;
 &lt;p&gt;GitHub Pages&lt;br&gt;
 Your site is published at http://www.cropse.com/&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="http://kayakuguri.github.io/blog/2015/03/10/set-subdomain/"&gt;參考&lt;/a&gt;&lt;/p&gt;</content><category term="funny"></category></entry><entry><title>FreeNas 安裝紀錄</title><link href="http://www.cropse.com/FreeNas-.html" rel="alternate"></link><published>2017-04-05T15:30:18+08:00</published><updated>2017-04-05T15:30:18+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-04-05:/FreeNas-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡整理用FreeNas的一些心得&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://kayakuguri.github.io/blog/2015/03/10/set-subdomain/"&gt;參考&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;sitemap for search engine&lt;/h3&gt;
+&lt;p&gt;其實很簡單，只要Google search console 登陸之後，使用plugin sitemap&lt;br&gt;
+就可以看到sitemap.xml，之後在&lt;strong&gt;檢索&lt;/strong&gt;-&amp;gt;&lt;strong&gt;Sitemap&lt;/strong&gt;增加該路徑即可&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;PLUGINS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pelican-plugins-master.sitemap&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,]&lt;/span&gt;
+
+&lt;span class="n"&gt;SITEMAP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;exclude&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;tag/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;category/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;xml&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;priorities&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;articles&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;indexes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;pages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;changefreqs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;articles&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;monthly&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;indexes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;daily&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;pages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;monthly&amp;#39;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="funny"></category></entry><entry><title>FreeNas 安裝紀錄</title><link href="http://www.cropse.com/FreeNas-.html" rel="alternate"></link><published>2017-04-05T15:30:18+08:00</published><updated>2017-04-05T15:30:18+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-04-05:/FreeNas-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡整理用FreeNas的一些心得&lt;/p&gt;
 &lt;p&gt;用&lt;code&gt;?&lt;/code&gt;跟&lt;code&gt;help&lt;/code&gt;來查詢可用的指令，像是選單的方式&lt;br&gt;
 所以如果要直接回到主選單直接敲&lt;code&gt;\&lt;/code&gt;就好，剩下基本上跟GUI操作會差不多&lt;br&gt;
 EX: &lt;code&gt;network interface bridge2 delete&lt;/code&gt;&lt;/p&gt;

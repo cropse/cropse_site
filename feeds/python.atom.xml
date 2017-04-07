@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog - python</title><link href="http://www.cropse.com/" rel="alternate"></link><link href="http://www.cropse.com/feeds/python.atom.xml" rel="self"></link><id>http://www.cropse.com/</id><updated>2017-04-05T16:05:36+08:00</updated><entry><title>pelican紀錄</title><link href="http://www.cropse.com/pelican%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-04-05T16:05:36+08:00</published><updated>2017-04-05T16:05:36+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-04-05:/pelican紀錄-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡簡單紀錄一下pelican設定步驟&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blog - python</title><link href="http://www.cropse.com/" rel="alternate"></link><link href="http://www.cropse.com/feeds/python.atom.xml" rel="self"></link><id>http://www.cropse.com/</id><updated>2017-04-05T16:05:36+08:00</updated><entry><title>pelican紀錄</title><link href="http://www.cropse.com/pelican%E7%B4%80%E9%8C%84-.html" rel="alternate"></link><published>2017-04-05T16:05:36+08:00</published><updated>2017-04-05T16:05:36+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-04-05:/pelican紀錄-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡簡單紀錄一下pelican設定步驟，紀錄的很隨便，主要是給自己看的，因為整個主題跟功能大多是自己刻的，所以過程會相對複雜一點&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;先做venv&lt;br&gt;
 &lt;code&gt;python3.5 -m venv VENV&lt;/code&gt;&lt;br&gt;
@@ -91,7 +91,28 @@ Value:&lt;/p&gt;
 &lt;p&gt;GitHub Pages&lt;br&gt;
 Your site is published at http://www.cropse.com/&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="http://kayakuguri.github.io/blog/2015/03/10/set-subdomain/"&gt;參考&lt;/a&gt;&lt;/p&gt;</content><category term="funny"></category></entry><entry><title>用Docker取代python的venv</title><link href="http://www.cropse.com/%E7%94%A8docker%E5%8F%96%E4%BB%A3python%E7%9A%84venv-.html" rel="alternate"></link><published>2017-03-28T14:09:30+08:00</published><updated>2017-03-28T14:09:30+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-03-28:/用docker取代python的venv-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;alpine&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://kayakuguri.github.io/blog/2015/03/10/set-subdomain/"&gt;參考&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;sitemap for search engine&lt;/h3&gt;
+&lt;p&gt;其實很簡單，只要Google search console 登陸之後，使用plugin sitemap&lt;br&gt;
+就可以看到sitemap.xml，之後在&lt;strong&gt;檢索&lt;/strong&gt;-&amp;gt;&lt;strong&gt;Sitemap&lt;/strong&gt;增加該路徑即可&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;PLUGINS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pelican-plugins-master.sitemap&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,]&lt;/span&gt;
+
+&lt;span class="n"&gt;SITEMAP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;exclude&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;tag/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;category/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;xml&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;priorities&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;articles&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;indexes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;pages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;changefreqs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;articles&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;monthly&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;indexes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;daily&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;pages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;monthly&amp;#39;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="funny"></category></entry><entry><title>用Docker取代python的venv</title><link href="http://www.cropse.com/%E7%94%A8docker%E5%8F%96%E4%BB%A3python%E7%9A%84venv-.html" rel="alternate"></link><published>2017-03-28T14:09:30+08:00</published><updated>2017-03-28T14:09:30+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-03-28:/用docker取代python的venv-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;alpine&lt;/p&gt;
 &lt;p&gt;apk update&lt;br&gt;
 apk add python3&lt;/p&gt;</content><category term="docker"></category><category term="python"></category></entry><entry><title>Python iterator&amp;generator</title><link href="http://www.cropse.com/python-iteratorgenerator-.html" rel="alternate"></link><published>2017-03-24T11:39:49+08:00</published><updated>2017-03-24T11:39:49+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-03-24:/python-iteratorgenerator-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;先講結論：&lt;br&gt;
 Iterator 是透過一個class 內部宣告&lt;code&gt;__iter__&lt;/code&gt;還有&lt;code&gt;__next__&lt;/code&gt;(python2 是&lt;code&gt;next&lt;/code&gt;)方法來達成可迭代(iterable)的物件(class)&lt;br&gt;
