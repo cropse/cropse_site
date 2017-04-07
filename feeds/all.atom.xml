@@ -112,7 +112,7 @@ Your site is published at http://www.cropse.com/&lt;/p&gt;
         &lt;span class="s1"&gt;&amp;#39;pages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;monthly&amp;#39;&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="funny"></category></entry><entry><title>FreeNas 安裝紀錄</title><link href="http://www.cropse.com/FreeNas-.html" rel="alternate"></link><published>2017-04-05T15:30:18+08:00</published><updated>2017-04-05T15:30:18+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-04-05:/FreeNas-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡整理用FreeNas的一些心得&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="funny"></category><category term="blog"></category><category term="github page"></category></entry><entry><title>FreeNas 安裝紀錄</title><link href="http://www.cropse.com/FreeNas-.html" rel="alternate"></link><published>2017-04-05T15:30:18+08:00</published><updated>2017-04-05T15:30:18+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-04-05:/FreeNas-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這裡整理用FreeNas的一些心得&lt;/p&gt;
 &lt;p&gt;用&lt;code&gt;?&lt;/code&gt;跟&lt;code&gt;help&lt;/code&gt;來查詢可用的指令，像是選單的方式&lt;br&gt;
 所以如果要直接回到主選單直接敲&lt;code&gt;\&lt;/code&gt;就好，剩下基本上跟GUI操作會差不多&lt;br&gt;
 EX: &lt;code&gt;network interface bridge2 delete&lt;/code&gt;&lt;/p&gt;

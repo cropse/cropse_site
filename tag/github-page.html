@@ -1,42 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=endge, chrome=IE8" />
-    <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
-    <title>Blog — Catégories</title>
-    <!--[if lte IE 8]><script type="text/javascript" src="http://www.cropse.com/theme/js/html5shiv.js"></script><![endif]-->
-    <link rel="stylesheet" type="text/css" href="http://www.cropse.com/theme/css/skeleton.css" />
-    <link rel="stylesheet" type="text/css" href="http://www.cropse.com/theme/css/theme.css" />
-    <link rel="shortcut icon" type="image/png" href="http://www.cropse.com/favicon.png" />
-    <!--[if lte IE 8]><link rel="shortcut icon" type="image/x-icon" href="http://www.cropse.com/favicon.ico" /><![endif]-->
-    <link rel="alternate" type="application/atom+xml"
-                           title="Blog — Flux Atom"
-                           href="http://www.cropse.com/" /> 
-  </head>
-  <body>
-    <div id="page">
-      <header id="page-head">
-        <h1>
-          <a href="http://www.cropse.com/index.html">Blog</a>
-        </h1>
-      </header>
-      
-      <div id="page-body">
-        <section id="page-main" role="main">
-    <section class="content">
-      <h1>Catégories</h1>
-      <ul id="category-list">
-      <li><a href="http://www.cropse.com/category/cicd.html">CI/CD</a> (2 articles)</li>
-      <li><a href="http://www.cropse.com/category/django.html">Django</a> (1 articles)</li>
-      <li><a href="http://www.cropse.com/category/docker.html">docker</a> (1 articles)</li>
-      <li><a href="http://www.cropse.com/category/posts.html">posts</a> (2 articles)</li>
-      <li><a href="http://www.cropse.com/category/python.html">python</a> (3 articles)</li>
-      </ul>
-    </section>
-      </section> <!-- /#page-main -->
 
-        <aside id="page-side">
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:image" content="http://www.cropse.com/theme/image/logo.png"></meta>
   <title>      Cropse:
+Post List
 </title>
   <!-- Latest compiled and minified CSS -->
 
@@ -53,6 +16,7 @@
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="http://www.cropse.com/theme/css/base.css">
 
+  <link rel="stylesheet" type="text/css" href="http://www.cropse.com/theme/css/post_list.css">
 </head>
 <body>
 
@@ -90,6 +54,81 @@
 
 <div class="container article">
   <div class="row">
+  
+  <div class="col-lg-9 col-md-8 col-sm-12">
+    <div class="row">
+        <div class="col-12">
+          <div class="card border-1">
+            <div class="card-block caption post-detail-item">
+              <h2 class="card-header"><a href="http://www.cropse.com/pelican紀錄-.html">pelican紀錄</a>
+
+              <small>2017- 4-05</small>
+              </h2>
+              <hr>
+            
+              <div class="card-text">
+                <p>這裡簡單紀錄一下pelican設定步驟，紀錄的很隨便，主要是給自己看的，因為整個主題跟功能大多是自己刻的，所以過程會相對複雜一點</p>
+<ul>
+<li>先做venv<br>
+<code>python3.5 -m venv VENV</code><br>
+<code>source VENV/bin/activate</code></li>
+</ul>
+<p>安裝套件</p>
+<div class="highlight"><pre><span></span>pip install pelican
+pip install Markdown
+pip install ghp-import
+</pre></div>
+
+
+<p>快速設定<br>
+<code>pelican-quickstart</code></p>
+<p>建一個repository，這裡用gp-pages的方式，所以名稱自訂<br>
+初始化一個git<br>
+<code>git init</code><br>
+<code>git remote add origin ...</code></p>
+              </div>
+
+              <p id="card-tag">Tag:                 <a href="http://www.cropse.com/tag/funny.html" class="badge btn-primary">funny</a>
+                                
+
+                <a href="http://www.cropse.com/tag/blog.html" class="badge btn-primary">blog</a>
+                                
+
+                <a href="http://www.cropse.com/tag/github-page.html" class="badge btn-primary">github page</a>
+                                
+
+              </p>
+              <a href="http://www.cropse.com/pelican紀錄-.html" class="btn btn-primary btn-lg" id="view">View <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+              
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="http://www.cropse.com/tag/github-page.html" tabindex="-1">
+              <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+          </li>
+          <li class="page-item disabled">
+            <a class="page-link" href="http://www.cropse.com/tag/github-page0.html" tabindex="-1">
+              <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+          </li>              <li class="page-item disabled">
+                <a class="page-link" href="http://www.cropse.com/tag/github-page.html">1</a></li>
+<li class="page-item disabled">
+            <a class="page-link" href="http://www.cropse.com/tag/github-page2.html" tabindex="-1">
+              <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+          </li>
+          <li class="page-item disabled">
+            <a class="page-link" href="http://www.cropse.com/tag/github-page1.html" tabindex="-1">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+          </li>
+        </ul>
+      </nav>
+  </div>
+
+
 
 <!-- Side Bar -->
 <div class="col-lg-3 col-md-4 ">
@@ -176,6 +215,7 @@
   </div>
 </div>
 
+
   </div>
 </div>
 
@@ -220,12 +260,4 @@
     }(document, 'script', 'facebook-jssdk'));
   </script>
 </body>
-</html></aside> <!-- /#page-side -->
-      </div>  <!-- /#page-body -->
-
-      <footer id="page-foot">
-        <p> Powered by <a href="http://pelican.readthedocs.org">Pelican</a></p>
-      </footer>
-    </div> <!-- /#page -->
-  </body>
 </html>
