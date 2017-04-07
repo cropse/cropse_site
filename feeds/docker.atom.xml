@@ -25,7 +25,7 @@
     - -v, --volumes   Remove the volumes associated with the container&lt;br&gt;
 - &lt;code&gt;rmi&lt;/code&gt; delete image&lt;/p&gt;
 &lt;p&gt;example:&lt;br&gt;
-&lt;code&gt;docker build docker build --tag aiohttp:0.1 .&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;docker build --tag aiohttp:0.1 .&lt;/code&gt;&lt;br&gt;
 &lt;code&gt;docker run -it -p 9898:80 -v $(pwd)/example:/run aiohttp:0.1 bash&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;-t&lt;/code&gt; &lt;code&gt;{Tag name}&lt;/code&gt; : add Tag&lt;br&gt;
 &lt;code&gt;login&lt;/code&gt; login docker registry to be ready to push&lt;/p&gt;

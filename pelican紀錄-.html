@@ -164,9 +164,19 @@ Your site is published at http://www.cropse.com/</p>
 </blockquote>
 <p><a href="http://kayakuguri.github.io/blog/2015/03/10/set-subdomain/">參考</a></p>
 <hr>
+<h3>註冊google Search Console</h3>
+<p>新增一個網址路徑來確認，就只是在pelican增加一個網頁的路徑給google確認就好<br>
+所以用客製化路徑的功能，我在<code>my-theme/template/custom/</code>放上google給我的一個靜態檔案<code>googelxxxxxxxxxxxxx.html</code><br>
+之後加入該參數在<code>pelicanconf.py</code></p>
+<blockquote>
+<p>TEMPLATE_PAGES = {<br>
+                  'custom/googelxxxxxxxxxxxxx.html': 'googelxxxxxxxxxxxxx.html'<br>
+                  }</p>
+</blockquote>
 <h3>sitemap for search engine</h3>
 <p>其實很簡單，只要Google search console 登陸之後，使用plugin sitemap<br>
-就可以看到sitemap.xml，之後在<strong>檢索</strong>-&gt;<strong>Sitemap</strong>增加該路徑即可</p>
+就可以看到sitemap.xml，上傳之後google search console<strong>檢索</strong>-&gt;<strong>Sitemap</strong>上傳該路徑即可<br>
+可以自己設定一下權重跟更新頻率</p>
 <div class="highlight"><pre><span></span><span class="n">PLUGINS</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pelican-plugins-master.sitemap&#39;</span><span class="p">,]</span>
 
 <span class="n">SITEMAP</span> <span class="o">=</span> <span class="p">{</span>
@@ -236,37 +246,37 @@ s.setAttribute('data-timestamp', +new Date());
           <div class="tags-block">
             <h6>Tag:</h6>
               <li class="">
-                <a href="http://www.cropse.com/tag/nginx.html">nginx</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/deploy.html">deploy</a>
-              </li>
-              <li class="">
                 <a href="http://www.cropse.com/tag/selenium.html">selenium</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/github-page.html">github page</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/uwsgi.html">uwsgi</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/postgresql.html">postgresql</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/cicd.html">CI/CD</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/aws.html">AWS</a>
+                <a href="http://www.cropse.com/tag/nginx.html">nginx</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/funny.html">funny</a>
               </li>
               <li class="">
+                <a href="http://www.cropse.com/tag/postgresql.html">postgresql</a>
+              </li>
+              <li class="">
                 <a href="http://www.cropse.com/tag/python.html">python</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/cicd.html">CI/CD</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/blog.html">blog</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/github-page.html">github page</a>
+                <a href="http://www.cropse.com/tag/deploy.html">deploy</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/aws.html">AWS</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/docker.html">docker</a>
