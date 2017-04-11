@@ -42,19 +42,19 @@
         <section id="page-main" role="main">
       <h1>Mots-clés</h1>
       <ul id="tag-cloud">
-      <li data-count="1" title="1 article(s)"><a href="http://www.cropse.com/tag/cicd.html">CI/CD</a></li>
+      <li data-count="2" title="2 article(s)"><a href="http://www.cropse.com/tag/selenium.html">selenium</a></li>
       <li data-count="2" title="2 article(s)"><a href="http://www.cropse.com/tag/docker.html">docker</a></li>
+      <li data-count="1" title="1 article(s)"><a href="http://www.cropse.com/tag/cicd.html">CI/CD</a></li>
+      <li data-count="3" title="3 article(s)"><a href="http://www.cropse.com/tag/deploy.html">deploy</a></li>
       <li data-count="1" title="1 article(s)"><a href="http://www.cropse.com/tag/blog.html">blog</a></li>
-      <li data-count="2" title="2 article(s)"><a href="http://www.cropse.com/tag/nginx.html">nginx</a></li>
+      <li data-count="2" title="2 article(s)"><a href="http://www.cropse.com/tag/python.html">python</a></li>
+      <li data-count="1" title="1 article(s)"><a href="http://www.cropse.com/tag/postgresql.html">postgresql</a></li>
+      <li data-count="1" title="1 article(s)"><a href="http://www.cropse.com/tag/github-page.html">github page</a></li>
       <li data-count="2" title="2 article(s)"><a href="http://www.cropse.com/tag/funny.html">funny</a></li>
       <li data-count="1" title="1 article(s)"><a href="http://www.cropse.com/tag/aws.html">AWS</a></li>
-      <li data-count="1" title="1 article(s)"><a href="http://www.cropse.com/tag/uwsgi.html">uwsgi</a></li>
-      <li data-count="2" title="2 article(s)"><a href="http://www.cropse.com/tag/python.html">python</a></li>
       <li data-count="2" title="2 article(s)"><a href="http://www.cropse.com/tag/testcase.html">testcase</a></li>
-      <li data-count="1" title="1 article(s)"><a href="http://www.cropse.com/tag/github-page.html">github page</a></li>
-      <li data-count="2" title="2 article(s)"><a href="http://www.cropse.com/tag/selenium.html">selenium</a></li>
-      <li data-count="1" title="1 article(s)"><a href="http://www.cropse.com/tag/postgresql.html">postgresql</a></li>
-      <li data-count="3" title="3 article(s)"><a href="http://www.cropse.com/tag/deploy.html">deploy</a></li>
+      <li data-count="2" title="2 article(s)"><a href="http://www.cropse.com/tag/nginx.html">nginx</a></li>
+      <li data-count="1" title="1 article(s)"><a href="http://www.cropse.com/tag/uwsgi.html">uwsgi</a></li>
       </ul>
       </section> <!-- /#page-main -->
 
@@ -79,7 +79,6 @@
 
 </head>
 <body>
-
 <!--jumbotron && Navigation-->
 <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,6 +111,38 @@
 </nav>
 <!-- End -->
 
+
+<div id="black">
+
+<div id="particles-js">
+</div>
+<img id="cropse" alt="cropse" class="img-fluid mx-auto d-block" src="http://www.cropse.com/theme/image/cropse_base.png"><br>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="http://www.cropse.com/theme/js/app.js"></script>
+
+<link rel="stylesheet" type="text/css" href="http://www.cropse.com/theme/css/particles_style.css">
+<!-- stats.js -->
+<script>
+  var count_particles, stats, update;
+  stats = new Stats;
+  stats.setMode(0);
+  stats.domElement.style.position = 'absolute';
+  stats.domElement.style.left = '0px';
+  stats.domElement.style.top = '0px';
+  document.body.appendChild(stats.domElement);
+  count_particles = document.querySelector('.js-count-particles');
+  update = function() {
+    stats.begin();
+    stats.end();
+    if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+      count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+    }
+    requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+</script>
 <div class="container article">
   <div class="row">
 
@@ -134,16 +165,28 @@
           <div class="tags-block">
             <h6>Tag:</h6>
               <li class="">
-                <a href="http://www.cropse.com/tag/cicd.html">CI/CD</a>
+                <a href="http://www.cropse.com/tag/selenium.html">selenium</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/docker.html">docker</a>
               </li>
               <li class="">
+                <a href="http://www.cropse.com/tag/cicd.html">CI/CD</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/deploy.html">deploy</a>
+              </li>
+              <li class="">
                 <a href="http://www.cropse.com/tag/blog.html">blog</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/nginx.html">nginx</a>
+                <a href="http://www.cropse.com/tag/python.html">python</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/postgresql.html">postgresql</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/github-page.html">github page</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/funny.html">funny</a>
@@ -152,25 +195,13 @@
                 <a href="http://www.cropse.com/tag/aws.html">AWS</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/uwsgi.html">uwsgi</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/python.html">python</a>
-              </li>
-              <li class="">
                 <a href="http://www.cropse.com/tag/testcase.html">testcase</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/github-page.html">github page</a>
+                <a href="http://www.cropse.com/tag/nginx.html">nginx</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/selenium.html">selenium</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/postgresql.html">postgresql</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/deploy.html">deploy</a>
+                <a href="http://www.cropse.com/tag/uwsgi.html">uwsgi</a>
               </li>
             </ul>
           </div>
@@ -243,6 +274,7 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
+
 </body>
 </html></aside> <!-- /#page-side -->
       </div>  <!-- /#page-body -->
