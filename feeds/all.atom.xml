@@ -133,7 +133,9 @@ shell裡面使用cli:&lt;br&gt;
 &lt;code&gt;shell "ls -al"&lt;/code&gt;&lt;br&gt;
 &lt;a href="http://www.freenas.org/blog/freenas-cli-preview/"&gt;FreeNas CLI&lt;/a&gt;&lt;br&gt;
 &lt;a href="https://doc.freenas.org/9.3/freenas_cli.html#megacli"&gt;FreeNas utilties&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;有裝LSI的卡可以在shell裡面用&lt;code&gt;MegaCli&lt;/code&gt;指令，不過MSM這類的功能可能要自己刻，因為想要做一個硬碟有問題就寄信跟IFTTT通知我手機的功能，對FreeBSD跟MegaCli還不是太熟，所以有時間再嘗試看看&lt;/p&gt;
+&lt;p&gt;有裝LSI的卡可以在shell裡面用&lt;code&gt;MegaCli&lt;/code&gt;指令，不過MSM這類的功能可能要自己刻，因為想要做一個硬碟有問題就寄信跟IFTTT通知我手機的功能，對FreeBSD跟MegaCli還不是太熟，所以有時間再嘗試看看&lt;br&gt;
+&lt;strong&gt;更新&lt;/strong&gt;：FreeNas Corral暫時停止更新，踩雷停止。&lt;br&gt;
+目前應該改玩Openmediavault，base on debian的系統相對開放一點，之後在另外整理一篇OMV的，前提是有心得的話。&lt;/p&gt;
 &lt;p&gt;目前測試docker用GUI都還有點問題，等穩定一點在整理目前用的服務&lt;/p&gt;</content><category term="funny"></category></entry><entry><title>設定nginx proxy tls/ssl server</title><link href="http://www.cropse.com/%E8%A8%AD%E5%AE%9Anginx-proxy-tlsssl-server-.html" rel="alternate"></link><published>2017-03-30T11:13:12+08:00</published><updated>2017-03-30T11:13:12+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-03-30:/設定nginx-proxy-tlsssl-server-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;http在資料傳遞過程中沒有進行加密的動作，所以有中間人擷取到敏感資料的問題，&lt;a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB"&gt;中間人攻擊&lt;/a&gt;（Man-in-the-middle attack，縮寫：MITM），所以需要SSL跟TLS做加密的動作&lt;br&gt;
 80是一般http通用接口，443是https的接口，所以其實只要在443port上加入ssl憑證就可以了&lt;br&gt;
 Ref:&lt;a href="https://blog.gtwang.org/linux/nginx-create-and-install-ssl-certificate-on-ubuntu-linux/"&gt;NGINX 設定 HTTPS 網頁加密連線，建立自行簽署的 SSL 憑證&lt;/a&gt;&lt;/p&gt;
@@ -189,36 +191,50 @@ Ref:&lt;a href="https://blog.gtwang.org/linux/nginx-create-and-install-ssl-certi
 &lt;p&gt;但是ssl不會有憑證，需要跟發放憑證的供應商買，所以有&lt;strong&gt;Let's Encrypt&lt;/strong&gt;這家免費提供ssl的公司，&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.peterdavehello.org/2015/10/build-an-a-plus-best-practice-https-web-server-via-nginx-chinese-version/"&gt;用 nginx 建置一個 A+ 等級的 https 網頁伺服器&lt;/a&gt;&lt;/p&gt;</content><category term="nginx"></category><category term="deploy"></category></entry><entry><title>用Docker取代python的venv</title><link href="http://www.cropse.com/%E7%94%A8docker%E5%8F%96%E4%BB%A3python%E7%9A%84venv-.html" rel="alternate"></link><published>2017-03-28T14:09:30+08:00</published><updated>2017-03-28T14:09:30+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-03-28:/用docker取代python的venv-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;alpine&lt;/p&gt;
 &lt;p&gt;apk update&lt;br&gt;
-apk add python3&lt;/p&gt;</content><category term="docker"></category><category term="python"></category></entry><entry><title>Docker cheat sheet</title><link href="http://www.cropse.com/docker-cheat-sheet-.html" rel="alternate"></link><published>2017-03-24T17:41:37+08:00</published><updated>2017-03-24T17:41:37+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-03-24:/docker-cheat-sheet-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;Useage:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker &lt;span class="p"&gt;[&lt;/span&gt;option&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;Command&lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="err"&gt;-&lt;/span&gt;i interactive mode
-    &lt;span class="err"&gt;-&lt;/span&gt;t pseudo TTY mode
-    &lt;span class="err"&gt;-&lt;/span&gt;d background mode
-    &lt;span class="err"&gt;-&lt;/span&gt;p &lt;span class="p"&gt;{&lt;/span&gt;local host port&lt;span class="p"&gt;}:{&lt;/span&gt;container vps port&lt;span class="p"&gt;}&lt;/span&gt; porting mapping
-    &lt;span class="err"&gt;-&lt;/span&gt;v &lt;span class="p"&gt;{&lt;/span&gt;Absolute local path&lt;span class="p"&gt;}:{&lt;/span&gt;Absolute container path&lt;span class="p"&gt;}&lt;/span&gt; mount volume
+apk add python3&lt;/p&gt;</content><category term="docker"></category><category term="python"></category></entry><entry><title>Docker cheat sheet</title><link href="http://www.cropse.com/docker-cheat-sheet-.html" rel="alternate"></link><published>2017-03-24T17:41:37+08:00</published><updated>2017-03-24T17:41:37+08:00</updated><author><name>Cropse</name></author><id>tag:www.cropse.com,2017-03-24:/docker-cheat-sheet-.html</id><summary type="html"></summary><content type="html">&lt;p&gt;這是我自己整理的docker cheatsheet，總之就是一邊用一邊更新自己使用過的指令&lt;/p&gt;
+&lt;p&gt;Useage:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker [option] {Command}
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;背景執行請用 -it -d, 這樣後面就可以用logs去查背景輸出&lt;/p&gt;
-&lt;p&gt;Command:&lt;br&gt;
-- &lt;code&gt;-p {host port}:{container port}&lt;/code&gt; port forward&lt;br&gt;
-- &lt;code&gt;inspect&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; looking for detail , json form&lt;br&gt;
-- &lt;code&gt;logs&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; inquery process log in background&lt;br&gt;
-- &lt;code&gt;ps&lt;/code&gt; inquery running container&lt;br&gt;
-    - &lt;code&gt;-a&lt;/code&gt; : according terminated &lt;br&gt;
-    - &lt;code&gt;-q&lt;/code&gt; : only inquery id&lt;br&gt;
-- &lt;code&gt;images&lt;/code&gt; 查本地中的 image&lt;br&gt;
-    - &lt;code&gt;-q&lt;/code&gt; : only id&lt;br&gt;
-- &lt;code&gt;commit&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; &lt;code&gt;{repository_name:tag}&lt;/code&gt; &lt;br&gt;
-- &lt;code&gt;build&lt;/code&gt; build Dockerfile&lt;br&gt;
-- &lt;code&gt;rm&lt;/code&gt; delete container &lt;br&gt;
-    - -v, --volumes   Remove the volumes associated with the container&lt;br&gt;
-- &lt;code&gt;rmi&lt;/code&gt; delete image&lt;/p&gt;
+&lt;p&gt;Command:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;inspect&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; looking for detail , json form&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;logs&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; inquery process log in background&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ps&lt;/code&gt; inquery running container&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-a&lt;/code&gt; : all container, according terminated &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-q&lt;/code&gt; : only inquery id&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;images&lt;/code&gt; check image&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-q&lt;/code&gt; : only id&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;commit&lt;/code&gt; &lt;code&gt;{container_id}&lt;/code&gt; &lt;code&gt;{repository_name:tag}&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;build&lt;/code&gt; build Dockerfile&lt;br&gt;
+&lt;code&gt;-t&lt;/code&gt; &lt;code&gt;{Tag name}&lt;/code&gt; : add Tag&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rm&lt;/code&gt; delete container &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;login&lt;/code&gt; login docker registry to be ready to push&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rmi&lt;/code&gt; delete image&lt;/li&gt;
+&lt;li&gt;run: run docker container from images&lt;ul&gt;
+&lt;li&gt;-i interactive mode&lt;/li&gt;
+&lt;li&gt;-t pseudo TTY mode&lt;/li&gt;
+&lt;li&gt;-d background mode&lt;/li&gt;
+&lt;li&gt;-p {local host port}:{container vps port} porting mapping&lt;/li&gt;
+&lt;li&gt;-v {Absolute local path}:{Absolute container path} mount volume&lt;/li&gt;
+&lt;li&gt;-p {host port}:{container port} port forward&lt;/li&gt;
+&lt;li&gt;-v {host_path}:{container_path} mount volume from host&lt;ul&gt;
+&lt;li&gt;掛上volume之後因為SELinux的原因，預設都是read-only，所以&lt;code&gt;{host_path}:{container_path}:Z&lt;/code&gt;就可以給這個container使用，使用小寫&lt;code&gt;z&lt;/code&gt;則是給多個container使用&lt;br&gt;
+&lt;a href="http://www.projectatomic.io/blog/2015/06/using-volumes-with-docker-can-cause-problems-with-selinux/"&gt;Using Volumes with Docker can Cause Problems with SELinux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;example:&lt;br&gt;
 &lt;code&gt;docker build --tag aiohttp:0.1 .&lt;/code&gt;&lt;br&gt;
 &lt;code&gt;docker run -it -p 9898:80 -v $(pwd)/example:/run aiohttp:0.1 bash&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;-t&lt;/code&gt; &lt;code&gt;{Tag name}&lt;/code&gt; : add Tag&lt;br&gt;
-&lt;code&gt;login&lt;/code&gt; login docker registry to be ready to push&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;docker exec -it {container} {command}&lt;/code&gt;: 繼續執行command&lt;ul&gt;
 &lt;li&gt;ex:&lt;code&gt;docker exec -it test ps aux&lt;/code&gt;&lt;/li&gt;
@@ -240,7 +256,7 @@ apk add python3&lt;/p&gt;</content><category term="docker"></category><category 
 &lt;h3&gt;先講結論：&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;export: 打包container出來，image會被合併成一包，使用import匯入&lt;/li&gt;
-&lt;li&gt;save: 把container的紀錄給保存下來，會保留image的紀錄，安裝也是批次安裝，使用load匯入&lt;/li&gt;
+&lt;li&gt;save: 把container的紀錄給保存下來，會保留image的安裝紀錄，安裝也是批次安裝，使用load匯入&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;使用方法：&lt;/h3&gt;
 &lt;h4&gt;export&lt;/h4&gt;

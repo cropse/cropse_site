@@ -108,13 +108,19 @@ apk add python3</p>
               <hr>
             
               <div class="card-text">
-                <p>Useage:</p>
-<div class="highlight"><pre><span></span>docker <span class="p">[</span>option<span class="p">]</span> <span class="p">{</span>Command<span class="p">}</span>
-    <span class="err">-</span>i interactive mode
-    <span class="err">-</span>t pseudo TTY mode
-    <span class="err">-</span>d background mode
-    <span class="err">-</span>p <span class="p">{</span>local host port<span class="p">}:{</span>container vps port<span class="p">}</span> porting mapping
-    <span class="err">-</span>v <span class="p">{</span>Absolute local path<span class="p">}:{</span>Absolute container path ...</pre></div>
+                <p>這是我自己整理的docker cheatsheet，總之就是一邊用一邊更新自己使用過的指令</p>
+<p>Useage:</p>
+<div class="highlight"><pre><span></span>docker [option] {Command}
+</pre></div>
+
+
+<p>背景執行請用 -it -d, 這樣後面就可以用logs去查背景輸出</p>
+<p>Command:</p>
+<ul>
+<li><code>inspect</code> <code>{container_id}</code> looking for detail , json form</li>
+<li><code>logs</code> <code>{container_id}</code> inquery process log in background</li>
+<li><code>ps</code> inquery running container<ul>
+<li><code>-a</code> : all ...</li></ul></li></ul>
               </div>
 
               <p id="card-tag">Tag:                 <a href="http://www.cropse.com/tag/docker.html" class="badge btn-primary">docker</a>
@@ -172,43 +178,43 @@ apk add python3</p>
           <div class="tags-block">
             <h6>Tag:</h6>
               <li class="">
+                <a href="http://www.cropse.com/tag/docker.html">docker</a>
+              </li>
+              <li class="">
                 <a href="http://www.cropse.com/tag/cicd.html">CI/CD</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/python.html">python</a>
+                <a href="http://www.cropse.com/tag/testcase.html">testcase</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/selenium.html">selenium</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/funny.html">funny</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/postgresql.html">postgresql</a>
-              </li>
-              <li class="">
                 <a href="http://www.cropse.com/tag/aws.html">AWS</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/github-page.html">github page</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/deploy.html">deploy</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/uwsgi.html">uwsgi</a>
+                <a href="http://www.cropse.com/tag/funny.html">funny</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/blog.html">blog</a>
-              </li>
-              <li class="">
-                <a href="http://www.cropse.com/tag/docker.html">docker</a>
+                <a href="http://www.cropse.com/tag/python.html">python</a>
               </li>
               <li class="">
                 <a href="http://www.cropse.com/tag/nginx.html">nginx</a>
               </li>
               <li class="">
-                <a href="http://www.cropse.com/tag/testcase.html">testcase</a>
+                <a href="http://www.cropse.com/tag/uwsgi.html">uwsgi</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/github-page.html">github page</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/postgresql.html">postgresql</a>
+              </li>
+              <li class="">
+                <a href="http://www.cropse.com/tag/blog.html">blog</a>
               </li>
             </ul>
           </div>
